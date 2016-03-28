@@ -1,0 +1,13 @@
+{
+    "users": [
+        {
+            "id":           1,
+            "name":         "charneard graperentill",
+            "email":        "charneard@graperentill.horse",
+            "passwordHash": "jgeg443ea4lkjelkjghflek5j7",
+            "employer":     null,
+            "job title":    null,
+            "birthday":     null
+        }
+    ]
+}
