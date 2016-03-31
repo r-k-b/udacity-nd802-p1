@@ -16,6 +16,7 @@
     "gulp-sourcemaps": "1.6.0",
     "gulp-util": "3.0.7",
     "gulp-watch": "4.3.5",
+    "moment": "2.12.0",
     "ramda": "0.20.0",
     "rx": "4.1.0",
     "vinyl-buffer": "1.0.0",
@@ -26,11 +27,14 @@
     "babel": "6.5.2",
     "babelify": "7.2.0",
     "browserify": "13.0.0",
+    "faker": "3.1.0",
     "mkdirp": "0.5.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebrowserify": "mkdirp dist",
+    "generateFakeEvents": "babel-node helpers/fill-event-data.js > events.json",
+    "generateFakeUsers": "babel-node helpers/fill-user-data.js > users.json",
     "browserify": "browserify js/main.js -t babelify --outfile dist/main.js",
     "browsersync": "",
     "start": "npm install && npm run browserify"

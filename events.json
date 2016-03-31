@@ -1,18 +1,32 @@
 {
     "events": [
         {
-            "utcStart": "2016-08-18T02:00:00Z",
-            "utcEnd": "2016-08-18T06:00:00Z",
-            "title":    "bagpie",
-            "note":     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, non, sit. Aut commodi, consectetur ex maxime nemo quod saepe vel? Culpa delectus minus neque voluptatibus. Odio odit sed totam ullam?",
-            "ownerId":  1,
-            "type": "Birthday Party",
+            "utcStart":   "2016-08-18T02:00:00Z",
+            "utcEnd":     "2016-08-18T06:00:00Z",
+            "title":      "bagpie",
+            "note":       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, non, sit. Aut commodi, consectetur ex maxime nemo quod saepe vel? Culpa delectus minus neque voluptatibus. Odio odit sed totam ullam?",
+            "hostId":     1,
+            "type":       "Birthday Party",
             "guestNames": [
                 "",
                 "",
                 ""
             ],
-            "location": "1 Example St"
+            "location":   "1 Example St"
+        },
+        {
+            "utcStart":   "2016-08-19T02:00:00Z",
+            "utcEnd":     "2016-08-19T06:00:00Z",
+            "title":      "varestod",
+            "note":       "Beatae debitis ducimus earum expedita magni nulla qui quidem voluptatum! A architecto consequatur consequuntur eos, esse hic illo magnam magni, officia optio perspiciatis quam similique totam. Assumenda cupiditate iste voluptas?",
+            "hostId":     1,
+            "type":       "Going-Away Party",
+            "guestNames": [
+                "",
+                "",
+                ""
+            ],
+            "location":   "1 Example St"
         }
     ]
 }
