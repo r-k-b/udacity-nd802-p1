@@ -109,3 +109,5 @@ Validation occurs no later than immediately after user focus leave the input and
 - [ ] event creation
 - [ ] event list
 - [ ] a11y review
+
+- [ ] submit a PR to [tape-watch](https://github.com/rstacruz/tape-watch) for `babel-register` support

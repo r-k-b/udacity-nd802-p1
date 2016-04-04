@@ -51,4 +51,10 @@ gulp.task('sync', () =>
 
 gulp.watch('./*.html').on('change', browserSync.reload);
 
+gulp.task('watchTests', () => {
+  gulp.watch('./spec/*.js').on('change', () => {
+    // todo: `npm run test` (tape) from here (how?)
+  });
+});
+
 gulp.task('default', ['sync', 'watchify']);
