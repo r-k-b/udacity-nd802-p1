@@ -3,18 +3,17 @@
 import he from 'he';
 import assert from 'assert';
 import {Observable, config} from 'rx';
+import {listActions} from './appUtils';
 import {div, pre, strong} from '@cycle/dom';
-import {chooseEvent, isPresent, eventIdsMatch, listActions} from './appUtils';
-// import appUtils from './appUtils.js';
-import {compose, is, length, filter, find, propEq, not, has, curry} from 'ramda';
+import {compose, is, length, isNil, filter, find, propEq, not, has, curry} from 'ramda';
 
 // for better debugging in rxjs (slow!)
-// config.longStackSupport = true;
+config.longStackSupport = true;
 
 /**
  *
- * @param acc
- * @param item
+ * @param {Array} acc
+ * @param {*} item
  */
 const listReducer = curry((acc, item) => {
   assert(is(Object, listActions), 'listActions object should be present');
@@ -25,24 +24,45 @@ const listReducer = curry((acc, item) => {
 });
 
 function App(sources) {
-  const timer$ = Observable.interval(4e2);
-  const counter$ = timer$.map(x => div(`x:` + x));
 
-  const list$ = timer$
-    .map(x => {
-      return {
-        action: 'update',
-        value:  {
-          id:  Math.floor(x / 5) % 4,
-          foo: `foo${ x }`
-        }
-      }
-    })
+  const getEventsList$ = Observable.of({
+    url:      '/events.json',
+    category: 'eventsMainList',
+    method:   'GET'
+  });
+
+  const eventsList$ = sources.HTTP
+    .filter(res$ => res$.request.category === 'eventsMainList')
+    .mergeAll()
+    .map(res => res.body)
+    .startWith(null);
+
+  eventsList$.subscribe(x => {
+    console.info('eventsList$ x:');console.info(x);
+
+
+  });
+
+  const updateManyFetchedEvents = x => {
+    return {
+      action: 'updateMany',
+      value:  x['events']
+    }
+  };
+
+  const list$ = eventsList$
+    .filter(x => !isNil(x))
+    .map(updateManyFetchedEvents)
     .scan(listReducer, []);
+
+  list$.subscribe(x => {
+    console.info('list$ x:');console.info(x);
+  });
+
 
   const listAsString$ = list$.map(
     xs => div(xs.map(
-      x => pre(JSON.stringify(x || {}, null, 2))
+      x => pre(JSON.stringify(x || 'unparseable object passed to JSON.stringify', null, 2))
     ))
   );
 
@@ -55,8 +75,8 @@ function App(sources) {
   );
 
   return {
-    DOM: safeListAsString$
-    // DOM: counter$
+    DOM: safeListAsString$,
+    HTTP: getEventsList$
   };
 }
 

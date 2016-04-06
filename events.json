@@ -1,32 +1,73 @@
 {
-    "events": [
-        {
-            "utcStart":   "2016-08-18T02:00:00Z",
-            "utcEnd":     "2016-08-18T06:00:00Z",
-            "title":      "bagpie",
-            "note":       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, non, sit. Aut commodi, consectetur ex maxime nemo quod saepe vel? Culpa delectus minus neque voluptatibus. Odio odit sed totam ullam?",
-            "hostId":     1,
-            "type":       "Birthday Party",
-            "guestNames": [
-                "",
-                "",
-                ""
-            ],
-            "location":   "1 Example St"
-        },
-        {
-            "utcStart":   "2016-08-19T02:00:00Z",
-            "utcEnd":     "2016-08-19T06:00:00Z",
-            "title":      "varestod",
-            "note":       "Beatae debitis ducimus earum expedita magni nulla qui quidem voluptatum! A architecto consequatur consequuntur eos, esse hic illo magnam magni, officia optio perspiciatis quam similique totam. Assumenda cupiditate iste voluptas?",
-            "hostId":     1,
-            "type":       "Going-Away Party",
-            "guestNames": [
-                "",
-                "",
-                ""
-            ],
-            "location":   "1 Example St"
-        }
-    ]
+  "events": [
+    {
+      "id": "9ec0e59f-363d-4d22-b51e-8d0232b212f2",
+      "utcStart": "2016-09-23T23:41:04.710Z",
+      "utcEnd": "2016-07-16T19:30:23.291Z",
+      "title": "Refined Soft Shoes",
+      "note": "Aut doloremque et id. Adipisci ea aut libero. Aliquam quidem consequuntur enim.\n \rOptio quia et deleniti. Facilis esse magni. Ratione expedita laudantium ducimus at. Quos libero quia cumque et eius ut.\n \rDicta modi eligendi molestiae accusamus. Totam quia nam ad. Consequatur rem nobis vero. Vel voluptas libero et.",
+      "hostName": "Tabitha Trantow",
+      "type": "Conference Talk",
+      "guestNames": [],
+      "location": "8388 Kathryne Plains, West Liliane 93078"
+    },
+    {
+      "id": "fd54e577-dc59-48e5-bb86-9c8308e21b8f",
+      "utcStart": "2017-02-20T02:33:57.564Z",
+      "utcEnd": "2016-09-21T20:09:48.715Z",
+      "title": "Tasty Plastic Hat",
+      "note": "Fugiat modi hic corporis qui similique consequatur. Dolor vel sunt. Est sit est. Ut magnam et voluptatibus reiciendis rerum adipisci error quas. Quo sint ut nihil. Quaerat porro molestiae sed praesentium quod dignissimos necessitatibus qui.\n \rVoluptatem quibusdam exercitationem alias consequatur ab quis. Occaecati tempora sed quis consequatur inventore architecto. Expedita dignissimos deserunt magnam blanditiis eos et harum.\n \rQui magni ex animi adipisci eaque quaerat mollitia. Molestiae omnis sit. Veniam minus et voluptatem aspernatur placeat. Id eveniet nam cupiditate ut dolorem qui omnis est tenetur.",
+      "hostName": "Raoul Lockman",
+      "type": "Birthday Party",
+      "guestNames": [],
+      "location": "5683 Zboncak Plaza, West Pearlburgh 14379"
+    },
+    {
+      "id": "55e3239f-72f0-4cd8-845a-ed06a7f08921",
+      "utcStart": "2016-04-12T09:24:39.567Z",
+      "utcEnd": "2016-08-26T13:09:31.466Z",
+      "title": "Ergonomic Granite Car",
+      "note": "Qui dolorum voluptatum qui sed modi id optio. Eum ut alias aut nam molestiae neque. Ducimus molestias est earum facere est ab perferendis reiciendis.\n \rUt incidunt rerum dolore ut in sunt. Sint ut esse rem rem numquam atque numquam recusandae. Odit mollitia reprehenderit earum sed.\n \rId quibusdam nobis quod soluta expedita sit. Cupiditate vel corrupti. Eum id dolor est nostrum omnis. Pariatur voluptas atque ea pariatur iusto porro nihil. Quia est asperiores illo neque incidunt et quasi.",
+      "hostName": "Pink Larson",
+      "type": "Bar Mitzvah",
+      "guestNames": [],
+      "location": "233 Wunsch Pike, Shanahanport 57612-7151"
+    },
+    {
+      "id": "e24ffe4e-57fd-4269-9425-759025313d54",
+      "utcStart": "2016-08-06T12:04:00.225Z",
+      "utcEnd": "2017-03-29T11:48:30.259Z",
+      "title": "Practical Cotton Computer",
+      "note": "Est temporibus ut beatae repellendus placeat ut illum molestiae. In error magni omnis. Reprehenderit porro accusamus sed est corrupti eaque repellendus ut repudiandae. Consequuntur alias modi odit nostrum ab ducimus voluptatum porro. Dignissimos veritatis quidem id harum laborum aliquam consequatur. Velit aspernatur magni blanditiis a incidunt sunt.\n \rPerspiciatis eos consequatur dolore praesentium. Aut qui quo tenetur iure molestias est omnis atque aut. Officia blanditiis et. Repellendus minima iure consectetur qui est velit voluptas fugiat ut. Dolor excepturi molestiae perspiciatis aut praesentium. Ut quo quod nihil quia cumque tenetur itaque omnis sed.\n \rAliquam minima dolores qui hic doloremque et cumque. Dolorem dolores nostrum similique et magni doloribus esse. Ad suscipit ullam debitis id.",
+      "hostName": "Rahul Lynch",
+      "type": "Conference Talk",
+      "guestNames": [],
+      "location": "6895 Batz Fort, Terrillburgh 34392-1293"
+    },
+    {
+      "id": "fccb6921-bad9-4469-8b77-fb6406871696",
+      "utcStart": "2016-12-21T05:21:45.412Z",
+      "utcEnd": "2017-03-15T10:50:09.730Z",
+      "title": "Licensed Granite Chips",
+      "note": "Aut cumque cupiditate inventore et. Voluptatem possimus eos porro ex numquam non aut quod dolorem. Eligendi rerum iusto aperiam numquam et error sint. Dolorem voluptatem et.\n \rDoloremque quibusdam assumenda recusandae assumenda velit error. Hic qui totam iusto. Modi quos delectus. Nihil quae ut ut ipsum occaecati harum in.\n \rDelectus vero suscipit incidunt fuga non tempora. Ullam cum consequatur repellendus facilis. Quibusdam et enim est tempora error eos culpa aut ut. Et iure dolorem ullam modi explicabo.",
+      "hostName": "Claud Dickinson",
+      "type": "Wedding",
+      "guestNames": [],
+      "location": "1321 Patrick Vista, Abbotthaven 56775-4988"
+    },
+    {
+      "id": "8af1ffb8-0d21-4abd-8206-942f8de39384",
+      "utcStart": "2016-04-09T08:43:27.673Z",
+      "utcEnd": "2017-02-20T03:24:51.403Z",
+      "title": "Practical Cotton Bike",
+      "note": "Aut nostrum et perferendis laborum corrupti quae non. Nihil inventore ut labore nam nostrum vel. Exercitationem rerum blanditiis fugit repudiandae. Molestiae perspiciatis quo est nobis dolores rerum ipsum ipsam eum. Perspiciatis voluptas eum.\n \rModi omnis sit aperiam veniam sint architecto fuga. Aut laudantium dignissimos animi maiores blanditiis et. In ducimus eveniet. Est tempora ipsum autem. Beatae eius placeat dignissimos qui dolores beatae. Excepturi praesentium expedita dolore quaerat et et.\n \rVeniam est aut. Ullam modi ea et. Culpa repellat distinctio similique iste error voluptatem voluptate voluptatem quo.",
+      "hostName": "Madie Effertz",
+      "type": "Birthday Party",
+      "guestNames": [
+        "Cassidy Rosenbaum",
+        "Marion Hackett"
+      ],
+      "location": "374 Toy Fall, Port Chelsey 88582"
+    }
+  ]
 }

@@ -20,18 +20,23 @@ let anEvent = () => {
   let evDate = date.future();
   let evEnd = moment(evDate).add(Math.random() * 24, 'hours');
   return {
-    "utcStart":   date.future().toISOString(),
-    "utcEnd":     evEnd.toISOString(),
-    "title":      commerce.productName(),
-    // "avatar":     image.avatar(),
-    "note":       lorem.paragraphs(),
-    "hostName":   name.findName(),
-    "type":       random.arrayElement(eventTypes),
-    "guestNames": arrayOfUpTo(4).map(() => name.findName()),
-    "location":   `${ address.streetAddress() }, ${ address.city() } ${ address.zipCode() }`
+    id:         random.uuid(),
+    utcStart:   date.future().toISOString(),
+    utcEnd:     evEnd.toISOString(),
+    title:      commerce.productName(),
+    // "avatar:     image.avatar(),
+    note:       lorem.paragraphs(),
+    hostName:   name.findName(),
+    type:       random.arrayElement(eventTypes),
+    guestNames: arrayOfUpTo(4).map(() => name.findName()),
+    location:   `${ address.streetAddress() }, ${ address.city() } ${ address.zipCode() }`
   }
 };
 
 let fakeEvents = range(0, 6).map(anEvent);
 
-console.log(JSON.stringify(fakeEvents, null, 2));
+console.log(JSON.stringify(
+  {events: fakeEvents},
+  null,
+  2
+));
