@@ -29,16 +29,17 @@ export const eventIdsMatch = curry((eventA, eventB) => (eventA.id === eventB.id)
  * A representation of an Event (e.g., party, meeting, hoedown, etc etc)
  *
  * @typedef {Object} Event
- * @property {String} action
- * @property {*} value
- * @property {String} utcStart
- * @property {String} utcEnd
- * @property {String} title
- * @property {String} note
- * @property {Integer} hostId
- * @property {String} type
+ * 
+ * @property {String}        id
+ * @property {String}        action
+ * @property {String}        utcStart
+ * @property {String}        utcEnd
+ * @property {String}        title
+ * @property {String}        note
+ * @property {Integer}       hostId
+ * @property {String}        type
  * @property {Array<String>} guestNames
- * @property {String} location
+ * @property {String}        location
  */
 
 /**

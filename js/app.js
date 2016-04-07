@@ -2,6 +2,7 @@
 
 import he from 'he';
 import assert from 'assert';
+import * as views from './views';
 import {Observable, config} from 'rx';
 import {listActions} from './appUtils';
 import {div, pre, strong} from '@cycle/dom';
@@ -35,12 +36,11 @@ function App(sources) {
     .filter(res$ => res$.request.category === 'eventsMainList')
     .mergeAll()
     .map(res => res.body)
-    .startWith(null);
+    .startWith(null)
+    .share();
 
   eventsList$.subscribe(x => {
     console.info('eventsList$ x:');console.info(x);
-
-
   });
 
   const updateManyFetchedEvents = x => {
@@ -61,9 +61,7 @@ function App(sources) {
 
 
   const listAsString$ = list$.map(
-    xs => div(xs.map(
-      x => pre(JSON.stringify(x || 'unparseable object passed to JSON.stringify', null, 2))
-    ))
+    xs => div(xs.map(views.eventListItemLarge))
   );
 
   const safeListAsString$ = listAsString$.catch(
