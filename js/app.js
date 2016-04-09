@@ -26,21 +26,21 @@ const listReducer = curry((acc, item) => {
 
 function App(sources) {
 
-  const getEventsList$ = Observable.of({
+  const fetchEventsFromJSON$ = Observable.of({
     url:      '/events.json',
     category: 'eventsMainList',
     method:   'GET'
   });
 
-  const eventsList$ = sources.HTTP
+  const eventsJSON$ = sources.HTTP
     .filter(res$ => res$.request.category === 'eventsMainList')
     .mergeAll()
     .map(res => res.body)
     .startWith(null)
     .share();
 
-  eventsList$.subscribe(x => {
-    console.info('eventsList$ x:');console.info(x);
+  eventsJSON$.subscribe(x => {
+    console.info('eventsJSON$ x:');console.info(x);
   });
 
   const updateManyFetchedEvents = x => {
@@ -50,7 +50,7 @@ function App(sources) {
     }
   };
 
-  const list$ = eventsList$
+  const list$ = eventsJSON$
     .filter(x => !isNil(x))
     .map(updateManyFetchedEvents)
     .scan(listReducer, []);
@@ -60,11 +60,11 @@ function App(sources) {
   });
 
 
-  const listAsString$ = list$.map(
+  const listAsVTree$ = list$.map(
     xs => div(xs.map(views.eventListItemLarge))
   );
 
-  const safeListAsString$ = listAsString$.catch(
+  const safeListAsString$ = listAsVTree$.catch(
     e =>
       Observable.of(div([
         strong(he.encode(e.toString())),
@@ -74,7 +74,7 @@ function App(sources) {
 
   return {
     DOM: safeListAsString$,
-    HTTP: getEventsList$
+    HTTP: fetchEventsFromJSON$
   };
 }
 

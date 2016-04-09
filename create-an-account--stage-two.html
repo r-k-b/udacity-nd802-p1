@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your account has been created!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<article class="block-centered constrained-width-content">
+  <h1>Great! Your account has been created.</h1>
+  <form action="/resend-confirmation.html" method="POST">
+    <p>We've sent an email to you, to confirm your email address. If it hasn't
+       arrived in a few minutes, you can
+      <button type="submit"
+              title="to be implemented; sorry!"
+              class="button-as-link">click here to resend it.
+      </button>
+    </p>
+  </form>
+  <p>To improve your experience, you can provide more information below.</p>
+
+  <link rel="stylesheet" href="./css/account-form.css" property="stylesheet">
+
+  <form action="#" method="get" class="account-form__fields">
+    <div class="account-form__field-group">
+      <label for="name" class="account-form__field-label">Your name</label>
+
+      <div class="account-form__field-input__container">
+        <input type="text"
+               autofocus
+               required
+               id="name"
+               name="name"
+               class="account-form__field-input"
+               autocomplete="name"
+               placeholder="Alex">
+
+        <p class="account-form__field-hint">
+          <small><em>How should we address you?</em></small>
+        </p>
+      </div>
+    </div>
+
+    <div class="account-form__field-group">
+      <label class="account-form__field-label" for="location">Your Area</label>
+
+      <div class="account-form__field-input__container">
+        <input type="text"
+               id="location"
+               name="location"
+               placeholder="Springfield, USA"
+               class="account-form__field-input"
+               onfocus="geolocate()">
+        <!--todo: add [google maps api](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform) -->
+
+        <p class="account-form__field-hint">
+          <small><em>We'll use this information to help you find events.</em>
+          </small>
+        </p>
+      </div>
+    </div>
+
+    <div class="account-form__field-group">
+      <label class="account-form__field-label"
+             for="organisation">Organisation</label>
+
+      <div class="account-form__field-input__container">
+        <input type="text"
+               id="organisation"
+               name="organisation"
+               placeholder="Example Pty. Ltd."
+               class="account-form__field-input">
+
+        <p class="account-form__field-hint">
+          <small><em>We'll use this information to help you create events.</em>
+          </small>
+        </p>
+      </div>
+    </div>
+
+    <div class="account-form__field-group">
+      <label class="account-form__field-label"
+             for="bio"><abbr title="Biography">Bio</abbr></label>
+
+      <div class="account-form__field-input__container">
+      <textarea name="bio"
+                id="bio"
+                placeholder="Born at a very young age, breathing as though my life depended on it."
+                class="account-form__field-input"></textarea>
+
+        <p class="account-form__field-hint">
+          <small><em>Would you like to introduce yourself?</em>
+          </small>
+        </p>
+      </div>
+    </div>
+
+    <button type="submit" class="account-form__go-button">
+      Update my info
+    </button>
+  </form>
+</article>
+</body>
+</html>

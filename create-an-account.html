@@ -3,10 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <title>Create an Account</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
+<section class="block-centered constrained-width-content">
+  <h1>Create an Account</h1>
+  <link rel="stylesheet" href="./css/account-form.css" property="stylesheet">
+  <form action="/create-an-account--stage-two.html" method="get" class="account-form__fields">
+    <div class="account-form__field-group">
+      <label for="email" class="account-form__field-label">Email</label>
 
+      <input type="email"
+             autofocus
+             required
+             id="email"
+             name="email"
+             autocomplete="email"
+             class="account-form__field-input__container"
+             placeholder="youraddress@example.com">
+    </div>
+
+    <div class="account-form__field-group">
+      <label class="account-form__field-label" for="password">Password</label>
+
+      <input type="password"
+             required
+             id="password"
+             name="password"
+             minlength="12"
+             placeholder="I like my passwords like I like my sagas; long, unpredictable, and memorable."
+             class="account-form__field-input__container">
+
+      <p class="account-form__field-hint"><small><em>Need help coming up with a good one?
+        <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
+           target="_blank">Try a generator like this one at fourmilab.ch, </a>
+        <a href="http://passphra.se/" target="_blank">the one from
+                                                      passphra.se,</a> or <a
+            href="http://correcthorsebatterystaple.net/"
+            target="_blank">this one at correcthorsebatterystaple.net.</a></em></small>
+      </p>
+    </div>
+
+    <button type="submit" class="account-form__go-button">
+      Create my account
+    </button>
+  </form>
+</section>
 
 </body>
 </html>

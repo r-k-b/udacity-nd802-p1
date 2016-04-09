@@ -1,0 +1,41 @@
+.constrained-width-content {
+    max-width: 50em;
+}
+
+.block-centered {
+    margin: 0 auto;
+}
+
+.account-form__fields {
+    display:        flex;
+    flex-direction: column;
+    font-size:      1rem;
+}
+
+.account-form__field-group {
+    display:         flex;
+    flex-wrap:       wrap;
+    margin-bottom:   1em;
+    justify-content: flex-end;
+}
+
+.account-form__field-label {
+    flex: 0.1 1 10em;
+}
+
+.account-form__field-hint {
+    color:      #595959;
+    margin-top: 0.5em;
+}
+
+.account-form__field-input {
+    display: block;
+}
+
+.account-form__field-input__container {
+    flex: 3 1 30em;
+}
+
+.account-form__go-button {
+    padding: 0.5em;
+}

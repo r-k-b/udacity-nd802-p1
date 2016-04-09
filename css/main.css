@@ -1,4 +1,44 @@
+/* this file should only contain styles that will definitely be used on every page. */
+
 #main__container {
-    border: 2px solid green;
+    border:  2px solid green;
     padding: 0.5em;
+}
+
+html {
+    font-size:   18px;
+    box-sizing:  border-box;
+    line-height: 1.5;
+    font-family: "Droid Sans", "Helvetica Neue", "Calibri", sans-serif;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+p {
+    max-width: 40em; /* for readability */
+}
+
+input,
+textarea {
+    font:  inherit;
+    width: 100%;
+}
+
+a[target="_blank"]:after {
+    content:        '\2750';
+    vertical-align: super;
+    font-size:      0.83em;
+}
+
+.button-as-link {
+    background-color: transparent;
+    text-decoration:  underline;
+    border:           none;
+    color:            blue;
+    cursor:           pointer;
+    padding:          0;
+    font-family:      inherit;
+    font-size:        inherit;
 }

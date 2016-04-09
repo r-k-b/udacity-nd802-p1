@@ -106,8 +106,15 @@ Validation occurs no later than immediately after user focus leave the input and
 # todo
 
 - [ ] account creation
+    - [ ] live validation
+    - [ ] save account to localstorage
 - [ ] event creation
 - [ ] event list
+    - [✓] fetch event list over http GET   
+    - [ ] fetch saved events from localstorage    
+    - [✓] display events in list
+    - [ ] display events in detail
 - [ ] a11y review
 
+- [ ] css preprocessing
 - [ ] submit a PR to [tape-watch](https://github.com/rstacruz/tape-watch) for `babel-register` support
