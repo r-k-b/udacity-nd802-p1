@@ -6,13 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="css/main.css">
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"
+          integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"
+          crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.8/parsley.min.js"
+          integrity="sha384-Cbz3WMBXghdPHBUCrLA39nzgyS5Qbs5P/XvJxoTFccN5WL/w4INFXQKzrtXYIfWx"
+          crossorigin="anonymous"></script>
+
+  <!--Haven't version pinned this one, so SRI will break at some point...-->
+  <script defer src="/js/account-creation-step-2.js"></script>
+  <script defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQtJpoagyxJodG7PjQHcnjqorTOZOkrlI&libraries=places&callback=initAutocomplete"></script>
+
 </head>
 <body>
-<article class="block-centered constrained-width-content">
+<main class="block-centered constrained-width-content">
   <h1>Great! Your account has been created.</h1>
   <form action="/resend-confirmation.html" method="POST">
     <p>We've sent an email to you, to confirm your email address. If it hasn't
-       arrived in a few minutes, you can
+      arrived in a few minutes, you can
       <button type="submit"
               title="to be implemented; sorry!"
               class="button-as-link">click here to resend it.
@@ -21,9 +35,14 @@
   </form>
   <p>To improve your experience, you can provide more information below.</p>
 
+  <link rel="stylesheet" property="stylesheet" href="./css/parsley-common.css">
   <link rel="stylesheet" href="./css/account-form.css" property="stylesheet">
 
-  <form action="#" method="get" class="account-form__fields">
+  <form action="#"
+        method="get"
+        class="account-form__fields"
+        data-parsley-validate
+        data-parsley-trigger="keyup">
     <div class="account-form__field-group">
       <label for="name" class="account-form__field-label">Your name</label>
 
@@ -33,11 +52,12 @@
                required
                id="name"
                name="name"
+               aria-describedby="name_hint"
                class="account-form__field-input"
                autocomplete="name"
                placeholder="Alex">
 
-        <p class="account-form__field-hint">
+        <p class="account-form__field-hint" id="name_hint">
           <small><em>How should we address you?</em></small>
         </p>
       </div>
@@ -50,12 +70,13 @@
         <input type="text"
                id="location"
                name="location"
+               aria-describedby="location_hint"
                placeholder="Springfield, USA"
                class="account-form__field-input"
                onfocus="geolocate()">
         <!--todo: add [google maps api](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform) -->
 
-        <p class="account-form__field-hint">
+        <p class="account-form__field-hint" id="location_hint">
           <small><em>We'll use this information to help you find events.</em>
           </small>
         </p>
@@ -101,6 +122,6 @@
       Update my info
     </button>
   </form>
-</article>
+</main>
 </body>
 </html>

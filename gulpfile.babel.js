@@ -10,7 +10,9 @@ import BrowserSync from 'browser-sync';
 import sourcemaps from 'gulp-sourcemaps';
 import source from 'vinyl-source-stream';
 
-const browserSync = BrowserSync.create();
+const browserSync = BrowserSync.create({
+  logLevel: 'info'
+});
 
 const customBrowserifyOpts = merge(watchify.args, {
   ignoreWatch:  true,

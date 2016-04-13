@@ -3,19 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Create an Account</title>
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/main.css">
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"
+          integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"
+          crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.8/parsley.min.js"
+          integrity="sha384-Cbz3WMBXghdPHBUCrLA39nzgyS5Qbs5P/XvJxoTFccN5WL/w4INFXQKzrtXYIfWx"
+          crossorigin="anonymous"></script>
 </head>
 <body>
 
-<section class="block-centered constrained-width-content">
+<main class="block-centered constrained-width-content">
   <h1>Create an Account</h1>
-  <link rel="stylesheet" href="./css/account-form.css" property="stylesheet">
-  <form action="/create-an-account--stage-two.html" method="get" class="account-form__fields">
+
+  <link rel="stylesheet" property="stylesheet" href="./css/parsley-common.css">
+  <link rel="stylesheet" property="stylesheet" href="./css/account-form.css">
+
+  <form action="/create-an-account--stage-two.html"
+        method="get"
+        id="create-an-account-stage-1"
+        class="account-form__fields"
+        data-parsley-validate
+        data-parsley-trigger="keyup">
     <div class="account-form__field-group">
       <label for="email" class="account-form__field-label">Email</label>
 
+      <!--TODO: make validation visible to ATs, with `aria-invalid`-->
       <input type="email"
              autofocus
              required
@@ -34,24 +50,32 @@
              id="password"
              name="password"
              minlength="12"
+             aria-describedby="password_hint"
              placeholder="I like my passwords like I like my sagas; long, unpredictable, and memorable."
              class="account-form__field-input__container">
 
-      <p class="account-form__field-hint"><small><em>Need help coming up with a good one?
-        <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
-           target="_blank">Try a generator like this one at fourmilab.ch, </a>
-        <a href="http://passphra.se/" target="_blank">the one from
-                                                      passphra.se,</a> or <a
-            href="http://correcthorsebatterystaple.net/"
-            target="_blank">this one at correcthorsebatterystaple.net.</a></em></small>
+      <p class="account-form__field-hint" id="password_hint">
+        <small><em>Need help coming up with a good one?
+          <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
+             target="_blank">Try a generator like this one at fourmilab.ch, </a>
+          <a href="http://passphra.se/" target="_blank">the one from
+            passphra.se,</a> or <a href="http://correcthorsebatterystaple.net/"
+                                   target="_blank">this one at
+            correcthorsebatterystaple.net.</a></em></small>
       </p>
     </div>
+
+    <p>
+      <small><em>(This would be where we add the OAuth signin buttons, and tell
+        people they don't need to type in their email and remember a
+        password...)</em></small>
+    </p>
 
     <button type="submit" class="account-form__go-button">
       Create my account
     </button>
   </form>
-</section>
+</main>
 
 </body>
 </html>

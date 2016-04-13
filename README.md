@@ -106,7 +106,7 @@ Validation occurs no later than immediately after user focus leave the input and
 # todo
 
 - [ ] account creation
-    - [ ] live validation
+    - [✓] live validation
     - [ ] save account to localstorage
 - [ ] event creation
 - [ ] event list
