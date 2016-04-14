@@ -14,6 +14,10 @@
           src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.8/parsley.min.js"
           integrity="sha384-Cbz3WMBXghdPHBUCrLA39nzgyS5Qbs5P/XvJxoTFccN5WL/w4INFXQKzrtXYIfWx"
           crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/garlic.js/1.2.4/garlic.min.js"
+          integrity="sha384-x51rgqOhzE1XjH2yGza8INUS4HX8MJSKCt87mbRv87GE0naxBIsXLwpuiyewzeAV"
+          crossorigin="anonymous"></script>
 
   <!--Haven't version pinned this one, so SRI will break at some point...-->
   <script defer src="/js/account-creation-step-2.js"></script>
@@ -42,7 +46,9 @@
         method="get"
         class="account-form__fields"
         data-parsley-validate
-        data-parsley-trigger="keyup">
+        data-parsley-trigger="keyup"
+        data-persist="garlic"
+        data-destroy="false">
     <div class="account-form__field-group">
       <label for="name" class="account-form__field-label">Your name</label>
 

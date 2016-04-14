@@ -27,12 +27,13 @@
         id="create-an-account-stage-1"
         class="account-form__fields"
         data-parsley-validate
-        data-parsley-trigger="keyup">
+        data-parsley-trigger="keyup change">
     <div class="account-form__field-group">
-      <label for="email" class="account-form__field-label">Email</label>
+      <label for="email" class="account-form__field-label">Enter your Email</label>
 
       <!--TODO: make validation visible to ATs, with `aria-invalid`-->
       <input type="email"
+             data-parsley-type="email"
              autofocus
              required
              id="email"
@@ -43,7 +44,7 @@
     </div>
 
     <div class="account-form__field-group">
-      <label class="account-form__field-label" for="password">Password</label>
+      <label class="account-form__field-label" for="password">Create a Password</label>
 
       <input type="password"
              required
