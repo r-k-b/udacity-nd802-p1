@@ -1,11 +1,3 @@
-.constrained-width-content {
-    max-width: 50em;
-}
-
-.block-centered {
-    margin: 0 auto;
-}
-
 .account-form__fields {
     display:        flex;
     flex-direction: column;

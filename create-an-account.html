@@ -15,68 +15,93 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="layout-α__container">
+  <nav class="pagetop-nav layout-α__top-nav"
+       aria-label="Top Nav"
+       role="navigation">
+    <a href="/" rel="home" aria-label="To Home" class="pagetop-nav__item"><span
+        class="pagetop-nav__text">⌂</span></a>
 
-<main class="block-centered constrained-width-content">
-  <h1>Create an Account</h1>
+    <a href="/events.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text"><span class="pagetop-nav__text">Show Events</span></span></a>
 
-  <link rel="stylesheet" property="stylesheet" href="./css/parsley-common.css">
-  <link rel="stylesheet" property="stylesheet" href="./css/account-form.css">
+    <a href="/create-an-event.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Event</span></a>
 
-  <form action="/create-an-account--stage-two.html"
-        method="get"
-        id="create-an-account-stage-1"
-        class="account-form__fields"
-        data-parsley-validate
-        data-parsley-trigger="keyup change">
-    <div class="account-form__field-group">
-      <label for="email" class="account-form__field-label">Enter your Email</label>
+    <!--<a href="/create-an-account.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Account</span></a>-->
+  </nav>
 
-      <!--TODO: make validation visible to ATs, with `aria-invalid`-->
-      <input type="email"
-             data-parsley-type="email"
-             autofocus
-             required
-             id="email"
-             name="email"
-             autocomplete="email"
-             class="account-form__field-input__container"
-             placeholder="youraddress@example.com">
-    </div>
+  <div class="layout-α__main-content">
+    <main class="block-centered constrained-width-content">
+      <h1>Create an Account</h1>
 
-    <div class="account-form__field-group">
-      <label class="account-form__field-label" for="password">Create a Password</label>
+      <link rel="stylesheet"
+            property="stylesheet"
+            href="./css/parsley-common.css">
+      <link rel="stylesheet"
+            property="stylesheet"
+            href="./css/account-form.css">
 
-      <input type="password"
-             required
-             id="password"
-             name="password"
-             minlength="12"
-             aria-describedby="password_hint"
-             placeholder="I like my passwords like I like my sagas; long, unpredictable, and memorable."
-             class="account-form__field-input__container">
+      <form action="/create-an-account--stage-two.html"
+            method="get"
+            id="create-an-account-stage-1"
+            class="account-form__fields"
+            data-parsley-validate
+            data-parsley-trigger="keyup change">
+        <div class="account-form__field-group">
+          <label for="email" class="account-form__field-label">Enter your
+            Email</label>
 
-      <p class="account-form__field-hint" id="password_hint">
-        <small><em>Need help coming up with a good one?
-          <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
-             target="_blank">Try a generator like this one at fourmilab.ch, </a>
-          <a href="http://passphra.se/" target="_blank">the one from
-            passphra.se,</a> or <a href="http://correcthorsebatterystaple.net/"
-                                   target="_blank">this one at
-            correcthorsebatterystaple.net.</a></em></small>
-      </p>
-    </div>
+          <!--TODO: make validation visible to ATs, with `aria-invalid`-->
+          <input type="email"
+                 data-parsley-type="email"
+                 autofocus
+                 required
+                 id="email"
+                 name="email"
+                 autocomplete="email"
+                 class="account-form__field-input__container"
+                 placeholder="youraddress@example.com">
+        </div>
 
-    <p>
-      <small><em>(This would be where we add the OAuth signin buttons, and tell
-        people they don't need to type in their email and remember a
-        password...)</em></small>
-    </p>
+        <div class="account-form__field-group">
+          <label class="account-form__field-label" for="password">Create a
+            Password</label>
 
-    <button type="submit" class="account-form__go-button">
-      Create my account
-    </button>
-  </form>
-</main>
+          <input type="password"
+                 required
+                 id="password"
+                 name="password"
+                 minlength="12"
+                 aria-describedby="password_hint"
+                 placeholder="I like my passwords like I like my sagas; long, unpredictable, and memorable."
+                 class="account-form__field-input__container">
 
+          <p class="account-form__field-hint" id="password_hint">
+            <small><em>Need help coming up with a good one?
+              <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
+                 target="_blank">Try a generator like this one at
+                fourmilab.ch, </a> <a href="http://passphra.se/"
+                                      target="_blank">the one from
+                passphra.se,</a> or
+              <a href="http://correcthorsebatterystaple.net/" target="_blank">this
+                one at correcthorsebatterystaple.net.</a></em></small>
+          </p>
+        </div>
+
+        <p>
+          <small><em>(This would be where we add the OAuth signin buttons, and
+            tell people they don't need to type in their email and remember a
+            password...)</em></small>
+        </p>
+
+        <button type="submit" class="account-form__go-button">
+          Create my account
+        </button>
+      </form>
+    </main>
+  </div>
+</div>
 </body>
 </html>

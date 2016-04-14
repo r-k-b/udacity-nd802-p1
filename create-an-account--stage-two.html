@@ -19,115 +19,139 @@
           integrity="sha384-x51rgqOhzE1XjH2yGza8INUS4HX8MJSKCt87mbRv87GE0naxBIsXLwpuiyewzeAV"
           crossorigin="anonymous"></script>
 
-  <!--Haven't version pinned this one, so SRI will break at some point...-->
   <script defer src="/js/account-creation-step-2.js"></script>
+  <!--Haven't version pinned this one, so SRI will break at some point...-->
   <script defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQtJpoagyxJodG7PjQHcnjqorTOZOkrlI&libraries=places&callback=initAutocomplete"></script>
 
 </head>
 <body>
-<main class="block-centered constrained-width-content">
-  <h1>Great! Your account has been created.</h1>
-  <form action="/resend-confirmation.html" method="POST">
-    <p>We've sent an email to you, to confirm your email address. If it hasn't
-      arrived in a few minutes, you can
-      <button type="submit"
-              title="to be implemented; sorry!"
-              class="button-as-link">click here to resend it.
-      </button>
-    </p>
-  </form>
-  <p>To improve your experience, you can provide more information below.</p>
+<div class="layout-α__container">
+  <nav class="pagetop-nav layout-α__top-nav"
+       aria-label="Top Nav"
+       role="navigation">
+    <a href="/" rel="home" aria-label="To Home" class="pagetop-nav__item"><span
+        class="pagetop-nav__text">⌂</span></a>
 
-  <link rel="stylesheet" property="stylesheet" href="./css/parsley-common.css">
-  <link rel="stylesheet" href="./css/account-form.css" property="stylesheet">
+    <a href="/events.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text"><span class="pagetop-nav__text">Show Events</span></span></a>
 
-  <form action="#"
-        method="get"
-        class="account-form__fields"
-        data-parsley-validate
-        data-parsley-trigger="keyup"
-        data-persist="garlic"
-        data-destroy="false">
-    <div class="account-form__field-group">
-      <label for="name" class="account-form__field-label">Your name</label>
+    <a href="/create-an-event.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Event</span></a>
 
-      <div class="account-form__field-input__container">
-        <input type="text"
-               autofocus
-               required
-               id="name"
-               name="name"
-               aria-describedby="name_hint"
-               class="account-form__field-input"
-               autocomplete="name"
-               placeholder="Alex">
+    <!--<a href="/create-an-account.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Account</span></a>-->
+  </nav>
 
-        <p class="account-form__field-hint" id="name_hint">
-          <small><em>How should we address you?</em></small>
+  <div class="layout-α__main-content">
+    <main class="block-centered constrained-width-content" role="main">
+      <h1>Great! Your account has been created.</h1>
+      <form action="/resend-confirmation.html" method="POST">
+        <p>We've sent an email to you, to confirm your email address. If it
+          hasn't arrived in a few minutes, you can
+          <button type="submit"
+                  title="to be implemented; sorry!"
+                  class="button-as-link">click here to resend it.
+          </button>
         </p>
-      </div>
-    </div>
+      </form>
+      <p>To improve your experience, you can provide more information below.</p>
 
-    <div class="account-form__field-group">
-      <label class="account-form__field-label" for="location">Your Area</label>
+      <link rel="stylesheet"
+            property="stylesheet"
+            href="./css/parsley-common.css">
+      <link rel="stylesheet"
+            href="./css/account-form.css"
+            property="stylesheet">
 
-      <div class="account-form__field-input__container">
-        <input type="text"
-               id="location"
-               name="location"
-               aria-describedby="location_hint"
-               placeholder="Springfield, USA"
-               class="account-form__field-input"
-               onfocus="geolocate()">
-        <!--todo: add [google maps api](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform) -->
+      <form action="#"
+            method="get"
+            class="account-form__fields"
+            data-parsley-validate
+            data-parsley-trigger="keyup"
+            data-persist="garlic"
+            data-destroy="false">
+        <div class="account-form__field-group">
+          <label for="name" class="account-form__field-label">Your name</label>
 
-        <p class="account-form__field-hint" id="location_hint">
-          <small><em>We'll use this information to help you find events.</em>
-          </small>
-        </p>
-      </div>
-    </div>
+          <div class="account-form__field-input__container">
+            <input type="text"
+                   required
+                   aria-required="true"
+                   id="name"
+                   name="name"
+                   aria-describedby="name_hint"
+                   class="account-form__field-input"
+                   autocomplete="name"
+                   placeholder="Alex">
 
-    <div class="account-form__field-group">
-      <label class="account-form__field-label"
-             for="organisation">Organisation</label>
+            <p class="account-form__field-hint" id="name_hint">
+              <small><em>How should we address you?</em></small>
+            </p>
+          </div>
+        </div>
 
-      <div class="account-form__field-input__container">
-        <input type="text"
-               id="organisation"
-               name="organisation"
-               placeholder="Example Pty. Ltd."
-               class="account-form__field-input">
+        <div class="account-form__field-group">
+          <label class="account-form__field-label" for="location">Your
+            Area</label>
 
-        <p class="account-form__field-hint">
-          <small><em>We'll use this information to help you create events.</em>
-          </small>
-        </p>
-      </div>
-    </div>
+          <div class="account-form__field-input__container">
+            <input type="text"
+                   id="location"
+                   name="location"
+                   aria-describedby="location_hint"
+                   placeholder="Springfield, USA"
+                   class="account-form__field-input"
+                   onfocus="geolocate()">
 
-    <div class="account-form__field-group">
-      <label class="account-form__field-label"
-             for="bio"><abbr title="Biography">Bio</abbr></label>
+            <p class="account-form__field-hint" id="location_hint">
+              <small><em>We'll help you find events close to this place.</em>
+              </small>
+            </p>
+          </div>
+        </div>
 
-      <div class="account-form__field-input__container">
+        <div class="account-form__field-group">
+          <label class="account-form__field-label" for="organisation">Organisation</label>
+
+          <div class="account-form__field-input__container">
+            <input type="text"
+                   id="organisation"
+                   name="organisation"
+                   placeholder="Example Pty. Ltd."
+                   class="account-form__field-input">
+
+            <p class="account-form__field-hint">
+              <small><em>We'll use this information to help you create
+                events.</em>
+              </small>
+            </p>
+          </div>
+        </div>
+
+        <div class="account-form__field-group">
+          <label class="account-form__field-label"
+                 for="bio"><abbr title="Biography">Your Bio</abbr></label>
+
+          <div class="account-form__field-input__container">
       <textarea name="bio"
                 id="bio"
                 placeholder="Born at a very young age, breathing as though my life depended on it."
                 class="account-form__field-input"></textarea>
 
-        <p class="account-form__field-hint">
-          <small><em>Would you like to introduce yourself?</em>
-          </small>
-        </p>
-      </div>
-    </div>
+            <p class="account-form__field-hint">
+              <small><em>Would you like to introduce yourself?</em>
+              </small>
+            </p>
+          </div>
+        </div>
 
-    <button type="submit" class="account-form__go-button">
-      Update my info
-    </button>
-  </form>
-</main>
+        <button type="submit" class="account-form__go-button">
+          Update my info
+        </button>
+      </form>
+    </main>
+  </div>
+</div>
 </body>
 </html>

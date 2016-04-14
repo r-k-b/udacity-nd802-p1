@@ -42,3 +42,55 @@ a[target="_blank"]:after {
     font-family:      inherit;
     font-size:        inherit;
 }
+
+.constrained-width-content {
+    max-width: 50em;
+}
+
+.block-centered {
+    margin: 0 auto;
+}
+
+.pagetop-nav {
+    display:     flex;
+    flex-wrap:   wrap;
+    align-items: stretch;
+    text-align:  center;
+}
+
+.pagetop-nav__item {
+    flex:             1 0 auto;
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    background-color: #eeeeee;
+    padding:          0.5em;
+    margin:           0.5em;
+}
+
+.layout-α__container {
+    display:   flex;
+    flex-wrap: wrap;
+    flex:      1 0 auto;
+}
+
+.layout-α__top-nav {
+    flex-basis: 100%;
+    flex-grow:  1;
+}
+
+.layout-α__main-content {
+    flex-grow: 3;
+}
+
+@media (min-width: 1100px) {
+    .layout-α__top-nav {
+        flex-basis:     10em;
+        flex-direction: column;
+        order:          1;
+    }
+
+    .pagetop-nav__item {
+        flex-grow: 0;
+    }
+}
