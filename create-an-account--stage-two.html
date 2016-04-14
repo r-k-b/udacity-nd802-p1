@@ -76,16 +76,21 @@
 
           <div class="account-form__field-input__container">
             <input type="text"
-                   required
-                   aria-required="true"
                    id="name"
                    name="name"
-                   aria-describedby="name_hint"
+                   required
+                   aria-required="true"
+                   aria-describedby="name__validation name__hint"
+                   data-parsley-errors-container="#name__validation"
                    class="account-form__field-input"
                    autocomplete="name"
                    placeholder="Alex">
 
-            <p class="account-form__field-hint" id="name_hint">
+            <div class="account-form__field-validation-message"
+                 id="name__validation"
+                 aria-live="polite"></div>
+
+            <p class="account-form__field-hint" id="name__hint">
               <small><em>How should we address you?</em></small>
             </p>
           </div>

@@ -33,7 +33,7 @@
   </nav>
 
   <div class="layout-α__main-content">
-    <main class="block-centered constrained-width-content">
+    <main class="block-centered constrained-width-content" role="main">
       <h1>Create an Account</h1>
 
       <link rel="stylesheet"
@@ -56,13 +56,20 @@
           <!--TODO: make validation visible to ATs, with `aria-invalid`-->
           <input type="email"
                  data-parsley-type="email"
+                 data-parsley-errors-container="#email__validation"
                  autofocus
                  required
+                 aria-required="true"
+                 aria-describedby="email__validation"
                  id="email"
                  name="email"
                  autocomplete="email"
                  class="account-form__field-input__container"
                  placeholder="youraddress@example.com">
+
+          <div class="account-form__field-validation-message"
+               id="email__validation"
+               aria-live="polite"></div>
         </div>
 
         <div class="account-form__field-group">
@@ -71,14 +78,20 @@
 
           <input type="password"
                  required
+                 aria-required="true"
+                 data-parsley-errors-container="#password__validation"
                  id="password"
                  name="password"
                  minlength="12"
-                 aria-describedby="password_hint"
+                 aria-describedby="password__validation password__hint"
                  placeholder="I like my passwords like I like my sagas; long, unpredictable, and memorable."
                  class="account-form__field-input__container">
 
-          <p class="account-form__field-hint" id="password_hint">
+          <div class="account-form__field-validation-message"
+               id="password__validation"
+               aria-live="polite"></div>
+
+          <p class="account-form__field-hint" id="password__hint">
             <small><em>Need help coming up with a good one?
               <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
                  target="_blank">Try a generator like this one at

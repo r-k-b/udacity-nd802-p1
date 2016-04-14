@@ -107,6 +107,7 @@ Validation occurs no later than immediately after user focus leave the input and
 
 - [ ] account creation
     - [✓] live validation
+    - [ ] set `aria-invalid` as required _(why doesn't parsley automatically do this?)_
     - [ ] save account to localstorage
 - [ ] event creation
 - [ ] event list
