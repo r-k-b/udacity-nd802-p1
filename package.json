@@ -42,6 +42,6 @@
     "generateFakeUsers": "babel-node helpers/fill-user-data.js > users.json",
     "browserify": "browserify js/main.js -t babelify --outfile dist/main.js",
     "browsersync": "",
-    "start": "npm install && npm run browserify"
+    "start": "npm install && gulp"
   }
 }

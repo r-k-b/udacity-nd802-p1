@@ -5,6 +5,13 @@
 Prepare for this project with [Building High Conversation Web Forms](https://www.udacity.com/course/building-high-conversion-web-forms--ud890) and [Web Tooling and Automation.](https://www.udacity.com/course/web-tooling-automation--ud892)
 
 
+## Viewing this project
+
+Run `npm start` if this was freshly cloned.
+
+Otherwise, run `gulp`.
+
+
 ## Requirements
 
 You do not need to create a functioning back-end or save user information. Only the form components themselves and their performance will be evaluated.
