@@ -1,40 +1,44 @@
-.account-form__fields {
+.form-α__fields {
     display:        flex;
     flex-direction: column;
     font-size:      1rem;
 }
 
-.account-form__field-group {
+.form-α__field-group {
     display:         flex;
     flex-wrap:       wrap;
     margin-bottom:   1em;
     justify-content: flex-end;
 }
 
-.account-form__field-label {
+.form-α__field-label {
     flex: 0.1 1 10em;
 }
 
-.account-form__field-hint {
+.form-α__field-hint {
     color:      #595959;
     margin-top: 0.5em;
     flex-basis: 39.6em;
 }
 
-.account-form__field-input {
+.form-α__field-input {
     display: block;
 }
 
-.account-form__field-validation-message {
+.form-α__field-validation-message {
     flex: 0 1 39.6em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
 }
 
-.account-form__field-input__container {
+.form-α__field-validation-message .parsley-errors-list.filled {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.form-α__field-input__container {
     flex: 3 1 30em;
 }
 
-.account-form__go-button {
+.form-α__go-button {
     padding: 0.5em;
 }
+

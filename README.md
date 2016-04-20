@@ -116,6 +116,20 @@ Validation occurs no later than immediately after user focus leave the input and
     - [✓] display events in list
     - [ ] display events in detail
 - [ ] a11y review
+    - [ ] use `aria-errormessage` rather than `aria-describedby` [(spec)](https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage)
+    - [ ] is the `required` attribute actually spoken by ATs? [(ARIA-in-HTML 4.1)](http://w3c.github.io/aria-in-html/#some-examples-of-redundant-aria)
+    - [ ] why doesn't Chromevox speak the options in a datalist? Do JAWS and NVDA?
 
 - [ ] css preprocessing
+
+
+
+# maybedo
+
+- [ ] css preprocessing (sass, autoprefixer)
 - [ ] submit a PR to [tape-watch](https://github.com/rstacruz/tape-watch) for `babel-register` support
+- [ ] make the top nav into a single focusable element, and navigate it using arrow keys (cf. [OAA example #25](http://www.oaa-accessibility.org/example/25/))
+- [ ] replace imperative JS (such as `js/event-creation.js`) with functional (cycle.js)
+- [ ] make timezone / timeoffset explicit to user
+    - [ ] show event time in other timezones (e.g, PST, AEST, GMT)
+    

@@ -41,39 +41,38 @@
             href="./css/parsley-common.css">
       <link rel="stylesheet"
             property="stylesheet"
-            href="./css/account-form.css">
+            href="./css/form-alpha.css">
 
       <form action="/create-an-account--stage-two.html"
             method="get"
             id="create-an-account-stage-1"
-            class="account-form__fields"
+            class="form-α__fields"
             data-parsley-validate
             data-parsley-trigger="keyup change">
-        <div class="account-form__field-group">
-          <label for="email" class="account-form__field-label">Enter your
+        <div class="form-α__field-group">
+          <label for="email" class="form-α__field-label">Enter your
             Email</label>
 
           <!--TODO: make validation visible to ATs, with `aria-invalid`-->
           <input type="email"
                  data-parsley-type="email"
                  data-parsley-errors-container="#email__validation"
-                 autofocus
                  required
                  aria-required="true"
                  aria-describedby="email__validation"
                  id="email"
                  name="email"
                  autocomplete="email"
-                 class="account-form__field-input__container"
+                 class="form-α__field-input__container"
                  placeholder="youraddress@example.com">
 
-          <div class="account-form__field-validation-message"
+          <div class="form-α__field-validation-message"
                id="email__validation"
                aria-live="polite"></div>
         </div>
 
-        <div class="account-form__field-group">
-          <label class="account-form__field-label" for="password">Create a
+        <div class="form-α__field-group">
+          <label class="form-α__field-label" for="password">Create a
             Password</label>
 
           <input type="password"
@@ -85,13 +84,13 @@
                  minlength="12"
                  aria-describedby="password__validation password__hint"
                  placeholder="I like my passwords like I like my sagas; long, unpredictable, and memorable."
-                 class="account-form__field-input__container">
+                 class="form-α__field-input__container">
 
-          <div class="account-form__field-validation-message"
+          <div class="form-α__field-validation-message"
                id="password__validation"
                aria-live="polite"></div>
 
-          <p class="account-form__field-hint" id="password__hint">
+          <p class="form-α__field-hint" id="password__hint">
             <small><em>Need help coming up with a good one?
               <a href="https://www.fourmilab.ch/javascrypt/pass_phrase.html"
                  target="_blank">Try a generator like this one at
@@ -104,12 +103,12 @@
         </div>
 
         <p>
-          <small><em>(This would be where we add the OAuth signin buttons, and
-            tell people they don't need to type in their email and remember a
-            password...)</em></small>
+          <small><em>(This would be where we might add the OAuth signin buttons,
+            and tell people they don't need to type in their email and remember
+            a password...)</em></small>
         </p>
 
-        <button type="submit" class="account-form__go-button">
+        <button type="submit" class="form-α__go-button">
           Create my account
         </button>
       </form>

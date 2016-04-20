@@ -3,32 +3,263 @@
 <head>
   <meta charset="UTF-8">
   <title>Create an Event</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css">
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"
+          integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"
+          crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.8/parsley.min.js"
+          integrity="sha384-Cbz3WMBXghdPHBUCrLA39nzgyS5Qbs5P/XvJxoTFccN5WL/w4INFXQKzrtXYIfWx"
+          crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/garlic.js/1.2.4/garlic.min.js"
+          integrity="sha384-x51rgqOhzE1XjH2yGza8INUS4HX8MJSKCt87mbRv87GE0naxBIsXLwpuiyewzeAV"
+          crossorigin="anonymous"></script>
+  <script defer
+          crossorigin="anonymous"
+          integrity="sha256-QTFbCMKzMsKmdagXusjKHMZIwzEJtpnGYJ/v/ArHklQ="
+          src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script defer
+          src="https://cdn.jsdelivr.net/chrono/1.2.0/chrono.js"
+          integrity="sha256-KpurH1owxO5C6+ZTR6v6XttS5cWa74ogh/NnvTvqgFU="
+          crossorigin="anonymous"></script>
+  <!--<script src="https://cdn.jsdelivr.net/chrono/1.2.0/chrono.min.js"
+    integrity="sha256-OYYjbQDTNkOF7YDpTo19El2hmKb5YHRAL9guGwQDo6s="
+    crossorigin="anonymous"></script>-->
+  <script defer src="/js/event-creation.js"></script>
+  <!--Haven't version pinned this one, so SRI will break at some point...-->
+  <script defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQtJpoagyxJodG7PjQHcnjqorTOZOkrlI&libraries=places&callback=initAutocomplete"></script>
 </head>
 <body>
-<div></div>
-<div>Ad alias culpa enim facere fuga inventore iure maxime molestias nihil
-     possimus, repellendus velit voluptas! Architecto consequuntur dolor
-     eligendi impedit ipsum itaque labore neque non, obcaecati officia quo
-     similique vitae.
+
+<div class="layout-α__container">
+  <nav class="pagetop-nav layout-α__top-nav"
+       aria-label="Top Nav"
+       role="navigation">
+    <a href="/" rel="home" aria-label="To Home" class="pagetop-nav__item"><span
+        class="pagetop-nav__text">⌂</span></a>
+
+    <a href="/events.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text"><span class="pagetop-nav__text">Show Events</span></span></a>
+
+    <!--<a href="/create-an-event.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Event</span></a>-->
+
+    <a href="/create-an-account.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Account</span></a>
+  </nav>
+
+  <div class="layout-α__main-content">
+    <main class="block-centered constrained-width-content">
+      <h1>Create an Event</h1>
+
+      <link rel="stylesheet"
+            property="stylesheet"
+            href="./css/parsley-common.css">
+      <link rel="stylesheet"
+            property="stylesheet"
+            href="./css/form-alpha.css">
+
+      <form action="/event-created.html"
+            method="get"
+            id="create-an-event"
+            class="form-α__fields"
+            data-parsley-validate
+            data-parsley-trigger="keyup change"
+            data-persist="garlic">
+        <div class="form-α__field-group">
+          <label for="event-name" class="form-α__field-label">Name of the
+            event</label>
+
+          <input type="text"
+                 required
+                 aria-required="true"
+                 id="event-name"
+                 name="event-name"
+                 class="form-α__field-input__container"
+                 data-parsley-errors-container="#event-name__validation"
+                 aria-errormessage="event-name__validation"
+                 placeholder="Jimmy's Farewell">
+
+          <div class="form-α__field-validation-message"
+               id="event-name__validation"
+               aria-live="polite"></div>
+        </div>
+
+        <div class="form-α__field-group">
+          <label for="event-type" class="form-α__field-label">Type of the
+            event</label>
+
+          <datalist id="event-types">
+            <option value="Birthday Party"></option>
+            <option value="Conference Talk"></option>
+            <option value="Wedding"></option>
+            <option value="Hoedown"></option>
+          </datalist>
+
+          <input list="event-types"
+                 role="combobox"
+                 required
+                 aria-required="true"
+                 aria-autocomplete="list"
+                 aria-owns="event-types"
+                 id="event-type"
+                 name="event-type"
+                 class="form-α__field-input__container"
+                 data-parsley-errors-container="#event-type__validation"
+                 placeholder="Hoedown">
+
+          <div class="form-α__field-validation-message"
+               id="event-type__validation"
+               aria-live="polite"></div>
+        </div>
+
+        <div class="form-α__field-group">
+          <label for="event-host" class="form-α__field-label">Event
+            host</label>
+
+          <input type="text"
+                 required
+                 aria-required="true"
+                 id="event-host"
+                 name="event-host"
+                 class="form-α__field-input__container"
+                 data-parsley-errors-container="#event-host__validation"
+                 aria-describedby="event-host__validation event-host__hint"
+                 placeholder="Jo Smith">
+
+          <div class="form-α__field-validation-message"
+               id="event-host__validation"
+               aria-live="polite"></div>
+
+          <p class="form-α__field-hint" id="event-host__hint">
+            <small><em>This may be the name of a person, or of an
+              organisation.</em></small>
+          </p>
+        </div>
+
+
+        <div class="form-α__field-group">
+          <label for="event-times" class="form-α__field-label">When is the
+            event?</label>
+
+          <input type="text"
+                 required
+                 aria-required="true"
+                 aria-describedby="event-times__validation event-times__hint"
+                 aria-controls="event-times__readable-summary"
+                 id="event-times"
+                 name="event-times"
+                 data-parsley-natural-date
+                 class="form-α__field-input__container"
+                 data-parsley-errors-container="#event-times__validation"
+                 placeholder="next friday, 6pm to 9pm">
+
+          <!--todo: should we present spinners to the user, so they can fine-tune the times / duration?-->
+
+          <input type="text"
+                 class="hidden"
+                 aria-hidden="true"
+                 name="event-time-start"
+                 id="event-time-start">
+
+          <input type="text"
+                 class="hidden"
+                 aria-hidden="true"
+                 name="event-time-end"
+                 id="event-time-end">
+
+          <div id="event-times__readable-summary"
+               aria-live="polite"
+               class="form-α__field-validation-message"></div>
+
+          <div class="form-α__field-validation-message"
+               id="event-times__validation"
+               aria-live="polite"></div>
+
+          <p class="form-α__field-hint" id="event-times__hint">
+            <small><em> Type in the date and time of the event, like "next
+              friday, 6pm to 9pm", "january 21st", or "2/1/16 3pm - 5pm". We'll
+              show you exactly when we think that is. </em></small>
+          </p>
+        </div>
+
+        <div class="form-α__field-group">
+          <label for="event-guest-list" class="form-α__field-label">Guest
+            list</label>
+
+          <textarea required
+                    rows="6"
+                    aria-required="true"
+                    aria-describedby="event-guest-list__validation event-guest-list__hint"
+                    id="event-guest-list"
+                    name="event-guest-list"
+                    class="form-α__field-input__container"
+                    data-parsley-errors-container="#event-guest-list__validation"
+                    placeholder="Alex A.
+Bo Smith"></textarea>
+
+          <div class="form-α__field-validation-message"
+               id="event-guest-list__validation"
+               aria-live="polite"></div>
+
+          <p class="form-α__field-hint" id="event-guest-list__hint">
+            <small><em>Type in guest names, one per line.</em>
+            </small>
+          </p>
+        </div>
+
+        <div class="form-α__field-group">
+          <label class="form-α__field-label" for="event-location">Where is
+            the event?</label>
+
+          <div class="form-α__field-input__container">
+            <input type="text"
+                   id="event-location"
+                   name="event-location"
+                   aria-describedby="event-location_hint"
+                   required
+                   aria-required="true"
+                   placeholder="Springfield, USA"
+                   class="form-α__field-input__container"
+                   onfocus="geolocate()">
+
+            <p class="form-α__field-hint" id="event-location__hint"></p>
+          </div>
+        </div>
+
+        <div class="form-α__field-group">
+          <label for="event-notes" class="form-α__field-label">Notes for
+            guests</label>
+
+          <textarea rows="4"
+                    aria-describedby="event-notes__validation event-notes__hint"
+                    id="event-notes"
+                    name="event-notes"
+                    class="form-α__field-input__container"
+                    data-parsley-errors-container="#event-notes__validation"
+                    placeholder="Black tie. Dinner & drinks provided."></textarea>
+
+          <div class="form-α__field-validation-message"
+               id="event-notes__validation"
+               aria-live="polite"></div>
+
+          <p class="form-α__field-hint" id="event-notes__hint">
+            <small><em>Is there anything else that the guests should know?</em>
+            </small>
+          </p>
+        </div>
+
+        <button type="submit" class="form-α__go-button">
+          Create this event
+        </button>
+      </form>
+    </main>
+  </div>
 </div>
-<div>Amet commodi culpa distinctio ducimus esse fuga iure iusto maxime
-     molestiae, officia quae quam quibusdam quidem reiciendis rem rerum sequi
-     similique totam veritatis vitae! At iure libero neque nisi ratione.
-</div>
-<div>Ab asperiores distinctio earum eligendi exercitationem explicabo harum,
-     iste laborum quaerat quam quibusdam rem repellendus sed, tempora
-     temporibus! Aliquam architecto, corporis culpa cumque deleniti ducimus
-     magni minima omnis perferendis vero?
-</div>
-<div>Atque consequuntur ducimus enim, fuga ipsa iste molestiae neque nisi odit
-     omnis placeat praesentium quas repudiandae. Asperiores cum eius facilis
-     libero maiores molestiae numquam obcaecati pariatur, quibusdam quidem sunt
-     vero.
-</div>
-<div>Ad consectetur dolore esse explicabo fugit laudantium nesciunt optio
-     quisquam veniam. Deserunt distinctio enim eos excepturi incidunt ipsam
-     iusto laboriosam mollitia nobis pariatur quam quisquam, sequi tempore
-     temporibus velit, voluptate.
-</div>
+
 </body>
 </html>

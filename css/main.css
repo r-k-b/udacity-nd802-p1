@@ -32,6 +32,10 @@ a[target="_blank"]:after {
     font-size:      0.83em;
 }
 
+.hidden {
+    display: none;
+}
+
 .button-as-link {
     background-color: transparent;
     text-decoration:  underline;
