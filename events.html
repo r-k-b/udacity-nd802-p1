@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Events List</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Events List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/main.css">
+  <script defer src="./dist/bundle.js"></script>
 </head>
 <body>
-<div id="main__container"></div>
-<script src="./dist/bundle.js"></script>
+<div class="layout-α__container">
+  <nav class="pagetop-nav layout-α__top-nav"
+       aria-label="Top Nav"
+       role="navigation">
+    <a href="/" rel="home" aria-label="To Home" class="pagetop-nav__item"><span
+        class="pagetop-nav__text">⌂</span></a>
+
+    <!--<a href="/events.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text"><span class="pagetop-nav__text">Show Events</span></span></a>-->
+
+    <a href="/create-an-event.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Event</span></a>
+
+    <a href="/create-an-account.html"
+       class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Account</span></a>
+  </nav>
+
+  <div class="layout-α__main-content">
+    <main class="block-centered constrained-width-content">
+      <div id="main__container"></div>
+    </main>
+  </div>
+</div>
 </body>
 </html>

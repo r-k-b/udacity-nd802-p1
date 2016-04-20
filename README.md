@@ -105,23 +105,25 @@ Validation occurs no later than immediately after user focus leave the input and
 
 # todo
 
-- [ ] account creation
+- [✓] account creation
     - [✓] live validation
     - [ ] set `aria-invalid` as required _(why doesn't parsley automatically do this?)_
     - [ ] save account to localstorage
-- [ ] event creation
-- [ ] event list
+- [✓] event creation
+    - [ ] save event to localstorage
+- [✓] event list
     - [✓] fetch event list over http GET   
     - [ ] fetch saved events from localstorage    
     - [✓] display events in list
     - [ ] display events in detail
+    - [ ] make event views aesthetically pleasing
 - [ ] a11y review
     - [ ] use `aria-errormessage` rather than `aria-describedby` [(spec)](https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage)
     - [ ] is the `required` attribute actually spoken by ATs? [(ARIA-in-HTML 4.1)](http://w3c.github.io/aria-in-html/#some-examples-of-redundant-aria)
     - [ ] why doesn't Chromevox speak the options in a datalist? Do JAWS and NVDA?
 
 - [ ] css preprocessing
-
+- [ ] html templating (koa + ejs?)
 
 
 # maybedo

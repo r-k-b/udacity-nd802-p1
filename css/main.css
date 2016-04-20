@@ -1,10 +1,5 @@
 /* this file should only contain styles that will definitely be used on every page. */
 
-#main__container {
-    border:  2px solid green;
-    padding: 0.5em;
-}
-
 html {
     font-size:   18px;
     box-sizing:  border-box;
