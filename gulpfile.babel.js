@@ -21,10 +21,16 @@ const customBrowserifyOpts = merge(watchify.args, {
   debug:        true,
   cache:        {},
   packageCache: {},
-  plugin:       ['watchify']
+  plugin:       [
+    'watchify'
+  ]
 });
 const brwsrfy = browserify(customBrowserifyOpts);
 
+brwsrfy.plugin('minifyify', {
+  map: 'ugbundle.js.map',
+  output: __dirname + '/dist/map.json'
+});
 
 const bundle = () => brwsrfy.bundle()
   // log errors if they happen
