@@ -1,9 +1,11 @@
 'use strict';
 
 import {
-  div, pre, strong, article, h1, ul, li, p, em
+  div, pre, strong, article, h2, h3, ul, li, p, em
 } from '@cycle/dom';
 
+
+import {prop, propOr, __} from 'ramda';
 
 /**
  * a → b
@@ -14,25 +16,78 @@ import {
  * @returns {Object} VTree
  */
 export const eventListItemLarge = ev => {
+  const evProp = prop(__, ev);
+  const evPropOr = propOr(__, __, ev);
+  const guardEmptyList = list => {
+    if (list.length < 1) {
+      return [
+        em('No guests yet')
+      ]
+    }
+    return list
+  };
+
   try {
     return article('.event__outer',
       {
         attributes: {
-          'data-event-id': ev.id,
-          'data-last-modified': ev.lastModified
+          'data-event-id':      evProp('id'),
+          'data-last-modified': evProp('lastModified')
         }
       },
       [
-        h1(ev.title),
+        h2(evProp('title')),
         p(
           '.event__byline',
-          'Hosted by ' + ev.hostName
+          em('Hosted by ' + evProp('hostName'))
         ),
         p(
-          '.event__note',
-          ev.note
+          '.event__type',
+          [
+            strong('Event Type: '),
+            evProp('type')
+          ]
         ),
-        p('Time: ' + ev.utcStart + ' to ' + ev.utcEnd) // todo: humanize the dates
+        p(
+          '.event__location',
+          [
+            strong('Location: '),
+            evProp('location')
+          ]
+        ),
+        p(
+          '.event__time',
+          [
+            strong('Starts at: '),
+            evProp('utcStart')
+          ]
+        ), // todo: humanize the dates,
+        p(
+          '.event__time',
+          [
+            strong('Ends at: '),
+            evProp('utcEnd')
+          ]
+        ),
+        div(
+          '.event__guest-list',
+          [
+            strong('Guests:'),
+            guardEmptyList(evProp('guestNames')).map(
+              guest => div('.event__guest-name', guest)
+            )
+          ]
+        ),
+        div(
+          '.event__guest-notes',
+          [
+            h3('Notes for Guests:'),
+            p(
+              '.event__note',
+              evProp('note')
+            )
+          ]
+        )
       ]
     );
   } catch (e) {

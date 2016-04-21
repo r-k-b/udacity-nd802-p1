@@ -50,6 +50,11 @@ a[target="_blank"]:after {
     margin: 0 auto;
 }
 
+.loading-spinner {
+    text-align: center;
+    padding:    1em;
+}
+
 .pagetop-nav {
     display:     flex;
     flex-wrap:   wrap;

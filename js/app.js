@@ -5,8 +5,19 @@ import assert from 'assert';
 import * as views from './views';
 import {Observable, config} from 'rx';
 import {listActions} from './appUtils';
-import {div, pre, strong} from '@cycle/dom';
-import {compose, is, length, isNil, filter, find, propEq, not, has, curry} from 'ramda';
+import {h1, div, pre, strong} from '@cycle/dom';
+import {
+  compose,
+  is,
+  length,
+  isNil,
+  filter,
+  find,
+  propEq,
+  not,
+  has,
+  curry
+} from 'ramda';
 
 // for better debugging in rxjs (slow!)
 config.longStackSupport = true;
@@ -40,7 +51,8 @@ function App(sources) {
     .share();
 
   eventsJSON$.subscribe(x => {
-    console.info('eventsJSON$ x:');console.info(x);
+    console.info('eventsJSON$ x:');
+    console.info(x);
   });
 
   const updateManyFetchedEvents = x => {
@@ -56,12 +68,18 @@ function App(sources) {
     .scan(listReducer, []);
 
   list$.subscribe(x => {
-    console.info('list$ x:');console.info(x);
+    console.info('list$ x:');
+    console.info(x);
   });
 
 
   const listAsVTree$ = list$.map(
-    xs => div(xs.map(views.eventListItemLarge))
+    xs => div(
+      [
+        h1('List of Events'),
+        xs.map(views.eventListItemLarge)
+      ]
+    )
   );
 
   const safeListAsString$ = listAsVTree$.catch(
@@ -73,7 +91,7 @@ function App(sources) {
   );
 
   return {
-    DOM: safeListAsString$,
+    DOM:  safeListAsString$,
     HTTP: fetchEventsFromJSON$
   };
 }
