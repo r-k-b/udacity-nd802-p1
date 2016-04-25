@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Robert K. Bell",
   "license": "ISC",
+  "repository": "git@github.com:r-k-b/udacity-nd802-p1.git",
   "dependencies": {
     "@cycle/core": "6.0.3",
     "@cycle/dom": "9.2.2",
