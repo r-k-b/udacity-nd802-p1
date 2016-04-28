@@ -54,6 +54,11 @@ brwsrfy.on('log', gutil.log);
 
 gulp.task('sync', () =>
   browserSync.init({
+    files: [
+      'css/*.css',
+      'dist/*.js',
+      'dist/css/*.css',
+    ],
     server: {
       baseDir: "./"
     }
