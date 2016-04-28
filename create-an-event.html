@@ -43,7 +43,8 @@
         class="pagetop-nav__text">⌂</span></a>
 
     <a href="/events.html"
-       class="pagetop-nav__item"><span class="pagetop-nav__text"><span class="pagetop-nav__text">Show Events</span></span></a>
+       class="pagetop-nav__item"><span class="pagetop-nav__text"><span
+        class="pagetop-nav__text">Show Events</span></span></a>
 
     <!--<a href="/create-an-event.html"
        class="pagetop-nav__item"><span class="pagetop-nav__text">Create an Event</span></a>-->
@@ -140,11 +141,86 @@
           </p>
         </div>
 
+        <fieldset data-datetime-method="strict" class="form-α__fieldset-reset hidden_" disabled>
+          <div class="form-α__field-group">
+            <label for="event-date-start" class="form-α__field-label">What date does the event begin?</label>
+
+            <input type="date"
+                   required
+                   aria-required="true"
+                   id="event-date-start"
+                   name="event-date-start"
+                   class="form-α__field-input__container"
+                   data-parsley-errors-container="#event-host__validation"
+                   aria-describedby="event-date-start__validation"
+                   placeholder="Jo Smith">
+
+            <div class="form-α__field-validation-message"
+                 id="event-date-start__validation"
+                 aria-live="polite"></div>
+          </div>
+
+          <div class="form-α__field-group">
+            <label for="event-time-start" class="form-α__field-label">What time does the event begin?</label>
+
+            <input type="time"
+                   required
+                   aria-required="true"
+                   id="event-time-start"
+                   name="event-time-start"
+                   class="form-α__field-input__container"
+                   data-parsley-errors-container="#event-host__validation"
+                   aria-describedby="event-time-start__validation">
+
+            <div class="form-α__field-validation-message"
+                 id="event-time-start__validation"
+                 aria-live="polite"></div>
+          </div>
+
+          <div class="form-α__field-group">
+            <label for="event-date-end" class="form-α__field-label">What date does the event end?</label>
+
+            <input type="date"
+                   required
+                   aria-required="true"
+                   id="event-date-end"
+                   name="event-date-end"
+                   class="form-α__field-input__container"
+                   data-parsley-errors-container="#event-host__validation"
+                   aria-describedby="event-date-end__validation">
+
+            <div class="form-α__field-validation-message"
+                 id="event-date-end__validation"
+                 aria-live="polite"></div>
+          </div>
+
+          <div class="form-α__field-group">
+            <label for="event-time-end" class="form-α__field-label">What time does the event begin?</label>
+
+            <input type="time"
+                   required
+                   aria-required="true"
+                   id="event-time-end"
+                   name="event-time-end"
+                   class="form-α__field-input__container"
+                   data-parsley-errors-container="#event-host__validation"
+                   aria-describedby="event-time-end__validation"
+                   placeholder="Jo Smith">
+
+            <div class="form-α__field-validation-message"
+                 id="event-time-end__validation"
+                 aria-live="polite"></div>
+          </div>
+
+
+        </fieldset>
 
         <div class="form-α__field-group">
           <label for="event-times" class="form-α__field-label">When is the
             event?</label>
 
+          <!-- NB: This particular input (`#event-times`) is meant to be free-form.
+          Restricting it with `date`, `time` or `datetime` types would be counterproductive. -->
           <input type="text"
                  required
                  aria-required="true"
@@ -155,23 +231,30 @@
                  data-parsley-natural-date
                  class="form-α__field-input__container"
                  data-parsley-errors-container="#event-times__validation"
+                 data-datetime-method="freeform"
                  placeholder="next friday, 6pm to 9pm">
 
-          <!--todo: should we present spinners to the user, so they can fine-tune the times / duration?-->
+          <div class="form-α__field-validation-message form-α__inline-checkbox__container">
+            <label>
+              <!--TODO: build behavior for this checkbox-->
+              <input type="checkbox" name="event-manual-datetime-entry" class="form-α__inline-checkbox"
+                     data-toggle-datetime-entry-methods="freeform,strict"> I'd rather enter the dates and times exactly.
+            </label>
+          </div>
 
           <input type="text"
                  class="hidden"
                  aria-hidden="true"
-                 name="event-time-start"
+                 name="event-time-start-iso8601"
                  title="Hidden field: ISO8601 representation of when the event starts"
-                 id="event-time-start">
+                 id="event-time-start-iso8601">
 
           <input type="text"
                  class="hidden"
                  aria-hidden="true"
-                 name="event-time-end"
+                 name="event-time-end-iso8601"
                  title="Hidden field: ISO8601 representation of when the event ends"
-                 id="event-time-end">
+                 id="event-time-end-iso8601">
 
           <div id="event-times__readable-summary"
                aria-live="polite"

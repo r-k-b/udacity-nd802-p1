@@ -5,8 +5,8 @@ window.eventCreation = (($, chrono, moment) => {
 
   const selectors = {
     naturalDateInput:  '[data-parsley-natural-date]',
-    eventStartISO8601: '#event-time-start',
-    eventEndISO8601:   '#event-time-end',
+    eventStartISO8601: '#event-time-start-iso8601',
+    eventEndISO8601:   '#event-time-end-iso8601',
     eventTimeSummary:  '#event-times__readable-summary',
   };
 
