@@ -25,6 +25,18 @@
           src="https://cdn.jsdelivr.net/chrono/1.2.0/chrono.js"
           integrity="sha256-KpurH1owxO5C6+ZTR6v6XttS5cWa74ogh/NnvTvqgFU="
           crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdn.jsdelivr.net/rxjs/4.1.0/rx.all.min.js"
+          integrity="sha256-p2+LEiwpJ4GSxOyzSdF7LeXtUgOnJAUQTnR+uYpcOPs="
+          crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdn.jsdelivr.net/rxjs-dom/7.0.3/rx.dom.min.js"
+          integrity="sha256-L6QqPMwp3+p1FWx/DPdUy4FpjyM+MqRYaRCpo7BFjB0="
+          crossorigin="anonymous"></script>
+  <script defer
+          src="https://cdn.jsdelivr.net/ramda/0.21.0/ramda.min.js"
+          integrity="sha256-cVOOKbovbMkVdlMEdSBTWta9TkmRts60+o0I92BxS48="
+          crossorigin="anonymous"></script>
   <!--<script src="https://cdn.jsdelivr.net/chrono/1.2.0/chrono.min.js"
     integrity="sha256-OYYjbQDTNkOF7YDpTo19El2hmKb5YHRAL9guGwQDo6s="
     crossorigin="anonymous"></script>-->
@@ -234,14 +246,6 @@
                  data-datetime-method="freeform"
                  placeholder="next friday, 6pm to 9pm">
 
-          <div class="form-α__field-validation-message form-α__inline-checkbox__container">
-            <label>
-              <!--TODO: build behavior for this checkbox-->
-              <input type="checkbox" name="event-manual-datetime-entry" class="form-α__inline-checkbox"
-                     data-toggle-datetime-entry-methods="freeform,strict"> I'd rather enter the dates and times exactly.
-            </label>
-          </div>
-
           <input type="text"
                  class="hidden"
                  aria-hidden="true"
@@ -269,6 +273,14 @@
               friday, 6pm to 9pm", "january 21st", or "2/1/16 3pm - 5pm". We'll
               show you exactly when we think that is. </em></small>
           </p>
+
+          <div class="form-α__field-validation-message form-α__inline-checkbox__container">
+            <label>
+              <!--TODO: build behavior for this checkbox-->
+              <input type="checkbox" name="event-manual-datetime-entry" class="form-α__inline-checkbox"
+                     data-toggle-datetime-entry-methods="freeform,strict"> I'd rather enter the dates and times exactly.
+            </label>
+          </div>
         </div>
 
         <div class="form-α__field-group">

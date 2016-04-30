@@ -130,6 +130,7 @@ window.eventCreation = (($, chrono, moment) => {
   return my;
 })(jQuery, chrono, moment);
 
+
 // based heavily on example code from https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
 (() => {
   var placeSearch, autocomplete;
@@ -164,3 +165,40 @@ window.eventCreation = (($, chrono, moment) => {
 
   window.geolocate = geolocate;
 })();
+
+
+window.eventCreationDateMethod = (Rx, R) => {
+  var my = {};
+
+  const selectors = {
+    dateInputModeCheckbox: '[data-toggle-datetime-entry-methods]',
+    strictModeControls:    '[data-datetime-method="strict"]',
+    laxModeControls:       '[data-datetime-method="freeform"]',
+  };
+
+  my.checkboxElem = document.querySelector(selectors.dateInputModeCheckbox);
+
+  const isEventTargetChecked = R.pathOr(false, ['target', 'checked']);
+
+  const isStrictDateMode$ = Rx.DOM
+    .click(my.checkboxElem)
+    .map(isEventTargetChecked);
+
+  const setMode = isStrict => {
+    console.info('next Strict Mode:', isStrict);
+
+    
+
+    R.map()
+  };
+
+  isStrictDateMode$.subscribe(
+    setMode,
+    error => {
+      console.error(error)
+    }
+  );
+
+  return my;
+};
+jQuery(document).ready(() => window.eventCreationDateMethod(Rx, R));

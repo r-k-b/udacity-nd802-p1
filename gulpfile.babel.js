@@ -56,6 +56,7 @@ gulp.task('sync', () =>
   browserSync.init({
     files: [
       'css/*.css',
+      'js/*.js',
       'dist/*.js',
       'dist/css/*.css',
     ],
