@@ -79,8 +79,7 @@
             id="create-an-event"
             class="form-α__fields"
             data-parsley-validate
-            data-parsley-trigger="keyup change"
-            data-persist="garlic">
+            data-parsley-trigger="keyup change">
         <div class="form-α__field-group">
           <label for="event-name" class="form-α__field-label">What is the name
             of this event?</label>
@@ -153,13 +152,15 @@
           </p>
         </div>
 
-        <fieldset data-datetime-method="strict" class="form-α__fieldset-reset hidden_" disabled>
+        <fieldset data-datetime-method="strict" class="form-α__fieldset-reset hidden" disabled>
           <div class="form-α__field-group">
             <label for="event-date-start" class="form-α__field-label">What date does the event begin?</label>
 
             <input type="date"
                    required
                    aria-required="true"
+                   data-datetime-method="strict"
+                   disabled
                    id="event-date-start"
                    name="event-date-start"
                    class="form-α__field-input__container"
@@ -178,6 +179,8 @@
             <input type="time"
                    required
                    aria-required="true"
+                   data-datetime-method="strict"
+                   disabled
                    id="event-time-start"
                    name="event-time-start"
                    class="form-α__field-input__container"
@@ -195,6 +198,8 @@
             <input type="date"
                    required
                    aria-required="true"
+                   data-datetime-method="strict"
+                   disabled
                    id="event-date-end"
                    name="event-date-end"
                    class="form-α__field-input__container"
@@ -207,11 +212,13 @@
           </div>
 
           <div class="form-α__field-group">
-            <label for="event-time-end" class="form-α__field-label">What time does the event begin?</label>
+            <label for="event-time-end" class="form-α__field-label">What time does the event end?</label>
 
             <input type="time"
                    required
                    aria-required="true"
+                   data-datetime-method="strict"
+                   disabled
                    id="event-time-end"
                    name="event-time-end"
                    class="form-α__field-input__container"
@@ -228,7 +235,8 @@
         </fieldset>
 
         <div class="form-α__field-group">
-          <label for="event-times" class="form-α__field-label">When is the
+          <label for="event-times" class="form-α__field-label"
+                 data-datetime-method="freeform">When is the
             event?</label>
 
           <!-- NB: This particular input (`#event-times`) is meant to be free-form.
@@ -246,29 +254,18 @@
                  data-datetime-method="freeform"
                  placeholder="next friday, 6pm to 9pm">
 
-          <input type="text"
-                 class="hidden"
-                 aria-hidden="true"
-                 name="event-time-start-iso8601"
-                 title="Hidden field: ISO8601 representation of when the event starts"
-                 id="event-time-start-iso8601">
-
-          <input type="text"
-                 class="hidden"
-                 aria-hidden="true"
-                 name="event-time-end-iso8601"
-                 title="Hidden field: ISO8601 representation of when the event ends"
-                 id="event-time-end-iso8601">
-
           <div id="event-times__readable-summary"
                aria-live="polite"
+               data-datetime-method="freeform"
                class="form-α__field-validation-message"></div>
 
           <div class="form-α__field-validation-message"
                id="event-times__validation"
+               data-datetime-method="freeform"
                aria-live="polite"></div>
 
-          <p class="form-α__field-hint" id="event-times__hint">
+          <p class="form-α__field-hint" id="event-times__hint"
+             data-datetime-method="freeform">
             <small><em> Type in the date and time of the event, like "next
               friday, 6pm to 9pm", "january 21st", or "2/1/16 3pm - 5pm". We'll
               show you exactly when we think that is. </em></small>
@@ -282,6 +279,22 @@
             </label>
           </div>
         </div>
+
+
+        <input type="text"
+               class="hidden"
+               aria-hidden="true"
+               name="event-time-start-iso8601"
+               title="Hidden field: ISO8601 representation of when the event starts"
+               id="event-time-start-iso8601">
+
+        <input type="text"
+               class="hidden"
+               aria-hidden="true"
+               name="event-time-end-iso8601"
+               title="Hidden field: ISO8601 representation of when the event ends"
+               id="event-time-end-iso8601">
+
 
         <div class="form-α__field-group">
           <label for="event-guest-list" class="form-α__field-label">Who's

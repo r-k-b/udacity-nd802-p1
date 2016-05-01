@@ -167,30 +167,132 @@ window.eventCreation = (($, chrono, moment) => {
 })();
 
 
-window.eventCreationDateMethod = (Rx, R) => {
+window.eventCreationDateMethod = (Rx, R, $) => {
   var my = {};
+
+  if (!$.fn.garlic) {
+    throw new Error('garlicjs is a required dependency')
+  }
 
   const selectors = {
     dateInputModeCheckbox: '[data-toggle-datetime-entry-methods]',
     strictModeControls:    '[data-datetime-method="strict"]',
     laxModeControls:       '[data-datetime-method="freeform"]',
+    creationForm:          '#create-an-event',
   };
+
+  /**
+   * http://www.mrspeaker.net/2015/08/03/functions-as-rxjs-subjects/
+   *
+   * @returns {Observable}
+   */
+  const rxFuncSubject = () => {
+    const subject = Object.assign(
+      (...args) => subject.onNext(...args),
+      Rx.Observable.prototype,
+      Rx.Subject.prototype
+    );
+
+    Rx.Subject.call(subject);
+
+    return subject;
+  };
+
 
   my.checkboxElem = document.querySelector(selectors.dateInputModeCheckbox);
 
-  const isEventTargetChecked = R.pathOr(false, ['target', 'checked']);
+  const retrievedSubj$ = rxFuncSubject();
 
-  const isStrictDateMode$ = Rx.DOM
+  // retrievedSubj$
+  //   .delay(1) // to allow garlicjs to update the checkbox (see garlicjs issue #45)
+  //   .subscribe(function logAllRetrievals(elem) {
+  //     console.debug('retrieved value: `', R.path(['0', 'value'], elem), '` for:', arguments);
+  //     console.debug('(elem checked?)', my.checkboxElem.checked)
+  //   });
+
+  const checkboxClick$ = Rx.DOM
     .click(my.checkboxElem)
-    .map(isEventTargetChecked);
+    .pluck('target', 'checked');
+
+  // seems like we can't get a proper stream of garlics' updates to checkboxes; may as
+  // well just poll-spam...
+  const checkboxPoll$ = Rx.Observable.interval(50)
+    .take(600) // ~30 seconds
+    .map(() => my.checkboxElem)
+    .pluck('checked');
+
+  const isStrictDateMode$ = Rx.Observable
+    .merge(checkboxClick$, checkboxPoll$)
+    // .startWith(false)
+    .distinctUntilChanged();
+
+  //noinspection JSValidateJSDoc
+  /**
+   *
+   * @param className {String}
+   * @param elemShouldHaveIt {boolean}
+   * @returns {Function}
+   */
+  my.updateClass = (className, elemShouldHaveIt) =>
+    /**
+     * IMPURE!
+     *
+     * Removes or adds the given class to the element,
+     * based on the truthiness of the second parameter.
+     *
+     * @param elem {DOM}
+     */
+    elem => {
+      const method = elemShouldHaveIt ? 'add' : 'remove';
+      R.pathOr(
+        () => undefined,
+        ['classList', method],
+        elem
+      ).bind(
+        R.prop('classList', elem)
+      )(className);
+
+      return elem;
+    };
+
+  //noinspection JSValidateJSDoc
+  /**
+   *
+   * @param elemShouldBeEnabled {boolean}
+   * @returns {Function}
+   */
+  my.updateEnabledState = elemShouldBeEnabled =>
+    /**
+     * IMPURE!
+     *
+     * @param elem {DOM}
+     */
+    elem => {
+      elemShouldBeEnabled
+        ? elem.removeAttribute('disabled')
+        : elem.setAttribute('disabled', 'true');
+
+      return elem;
+    };
 
   const setMode = isStrict => {
     console.info('next Strict Mode:', isStrict);
-
-    
-
-    R.map()
+    R.map(
+      R.compose(
+        my.updateClass('hidden', !isStrict),
+        my.updateEnabledState(isStrict)
+      ),
+      document.querySelectorAll(selectors.strictModeControls)
+    );
+    R.map(
+      R.compose(
+        my.updateClass('hidden', isStrict),
+        my.updateEnabledState(!isStrict)
+      ),
+      document.querySelectorAll(selectors.laxModeControls)
+    );
   };
+
 
   isStrictDateMode$.subscribe(
     setMode,
@@ -199,6 +301,13 @@ window.eventCreationDateMethod = (Rx, R) => {
     }
   );
 
+
+  /* Begin side-effects */
+
+  my.formGarlic = $(selectors.creationForm).garlic({
+    onRetrieve: retrievedSubj$
+  });
+
   return my;
 };
-jQuery(document).ready(() => window.eventCreationDateMethod(Rx, R));
+jQuery(document).ready(() => window.eventCreationDateMethod(Rx, R, jQuery));

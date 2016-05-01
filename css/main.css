@@ -27,7 +27,7 @@ a[target="_blank"]:after {
     font-size:      0.83em;
 }
 
-.hidden {
+.hidden.hidden {
     display: none;
 }
 
