@@ -1,7 +1,9 @@
 "use strict";
 // todo: do all this within cycle.js
-window.eventCreation = (($, chrono, moment) => {
+window.eventCreation = (($, chrono, moment, Rx) => {
   var my = {};
+
+  my.chronoObj$ = new Rx.Subject();
 
   const selectors = {
     naturalDateInput:  '[data-parsley-natural-date]',
@@ -76,7 +78,12 @@ window.eventCreation = (($, chrono, moment) => {
   Event Starts at: ${ start.format('dddd, MMMM Do YYYY, h:mm:ss a') }<br/>
   Event Ends at: ${ end.format('dddd, MMMM Do YYYY, h:mm:ss a') }<br/>
   Duration: ${ duration.humanize() }
-    `)
+    `);
+
+    return {
+      chronoResult, evChrono, start, end, duration
+    }
+
   };
 
   const clearLiveSummary = elem => {
@@ -89,24 +96,35 @@ window.eventCreation = (($, chrono, moment) => {
    * @param {DOM|String} dateInput
    */
   const parseNaturalDate = dateInput => {
-    const chronoObj = chrono.parse(
+    const chronoResult = chrono.parse(
       (typeof dateInput === 'string') ? dateInput : dateInput.value
     );
 
-    if (!isValidEventDate(chronoObj)) {
+    if (!isValidEventDate(chronoResult)) {
       $(selectors.eventStartISO8601).val('').change();
       $(selectors.eventEndISO8601).val('').change();
       clearLiveSummary(selectors.eventTimeSummary);
-      return chronoObj;
+
+      my.chronoObj$.onNext({
+        valid: false,
+        data: {chronoResult}
+      });
+
+      return chronoResult;
     }
 
     $(selectors.eventStartISO8601)
-      .val(chronoObj[0].start.date().toISOString());
+      .val(chronoResult[0].start.date().toISOString());
     $(selectors.eventEndISO8601)
-      .val((chronoObj[0].end || chronoObj[0].start).date().toISOString());
+      .val((chronoResult[0].end || chronoResult[0].start).date().toISOString());
 
-    showLiveSummary(selectors.eventTimeSummary, chronoObj);
-    return chronoObj;
+    my.chronoObj$.onNext({
+      valid: true,
+      /* side effects! */
+      data: showLiveSummary(selectors.eventTimeSummary, chronoResult)
+    });
+
+    return chronoResult;
   };
 
   Parsley
@@ -128,7 +146,7 @@ window.eventCreation = (($, chrono, moment) => {
   Parsley.on('field:success', markInputValid);
 
   return my;
-})(jQuery, chrono, moment);
+})(jQuery, chrono, moment, Rx);
 
 
 // based heavily on example code from https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
@@ -167,12 +185,14 @@ window.eventCreation = (($, chrono, moment) => {
 })();
 
 
-window.eventCreationDateMethod = (Rx, R, $) => {
+window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
   var my = {};
 
   if (!$.fn.garlic) {
     throw new Error('garlicjs is a required dependency')
   }
+
+  // eventCreation.chronoObj$.subscribe(x => console.log('chronoObj$:', x));
 
   const selectors = {
     dateInputModeCheckbox: '[data-toggle-datetime-entry-methods]',
@@ -310,4 +330,4 @@ window.eventCreationDateMethod = (Rx, R, $) => {
 
   return my;
 };
-jQuery(document).ready(() => window.eventCreationDateMethod(Rx, R, jQuery));
+jQuery(document).ready(() => window.eventCreationDateMethod(Rx, R, jQuery, window.eventCreation));
