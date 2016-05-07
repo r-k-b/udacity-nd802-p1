@@ -13,13 +13,57 @@ window.eventCreation = (($, chrono, moment, Rx) => {
   };
 
 
+  const hasNumAtPath = R.curry((path, obj) => {
+    const value = R.path(path, obj);
+    return R.is(Number, value)
+  });
+
+
+  const chronoChecklist = [
+    {
+      test: hasNumAtPath(['start', 'knownValues', 'hour']),
+      msg: 'Start time should be explicit.'
+    },
+    {
+      test: hasNumAtPath(['end', 'knownValues', 'hour']),
+      msg: 'End time should be explicit.'
+    },
+    {
+      test: hasNumAtPath(['start', 'knownValues', 'day']),
+      msg: 'Start date should be explicit.'
+    },
+    {
+      test: hasNumAtPath(['end', 'knownValues', 'day']),
+      msg: 'End date should be explicit.'
+    },
+  ];
+
+
+  const whyNotValidChrono = chronoResult => {
+    const filterMsgs = R.compose(
+      R.pluck('msg'),
+      R.filter(check => !check.test(chronoResult[0]))
+    );
+
+    return filterMsgs(chronoChecklist)
+  };
+
+
   /**
    * a → b
    *
    * @param {Object} chronoResult
    * @return {Boolean}
    */
-  const isValidEventDate = chronoResult => chronoResult.length >= 1;
+  const isValidEventDate = chronoResult => {
+    if (chronoResult.length < 1) {
+      return false;
+    }
+
+    const reasons = whyNotValidChrono(chronoResult);
+
+    return reasons.length === 0
+  };
 
 
   /**
