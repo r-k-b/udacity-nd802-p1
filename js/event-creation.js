@@ -19,22 +19,26 @@ window.eventCreation = (($, chrono, moment, Rx) => {
   });
 
 
-  const chronoChecklist = [
+  my.chronoChecklist = [
     {
       test: hasNumAtPath(['start', 'knownValues', 'hour']),
-      msg: 'Start time should be explicit.'
+      msg: 'Start time should be explicit.',
+      id: 'explicitStartTime',
     },
     {
       test: hasNumAtPath(['end', 'knownValues', 'hour']),
-      msg: 'End time should be explicit.'
+      msg: 'End time should be explicit.',
+      id: 'explicitEndTime',
     },
     {
       test: hasNumAtPath(['start', 'knownValues', 'day']),
-      msg: 'Start date should be explicit.'
+      msg: 'Start date should be explicit.',
+      id: 'explicitStartDate',
     },
     {
       test: hasNumAtPath(['end', 'knownValues', 'day']),
-      msg: 'End date should be explicit.'
+      msg: 'End date should be explicit.',
+      id: 'explicitEndDate',
     },
   ];
 
@@ -45,7 +49,7 @@ window.eventCreation = (($, chrono, moment, Rx) => {
       R.filter(check => !check.test(chronoResult[0]))
     );
 
-    return filterMsgs(chronoChecklist)
+    return filterMsgs(my.chronoChecklist)
   };
 
 
@@ -145,18 +149,26 @@ window.eventCreation = (($, chrono, moment, Rx) => {
     );
 
     if (!isValidEventDate(chronoResult)) {
-      $(selectors.eventStartISO8601).val('').change();
-      $(selectors.eventEndISO8601).val('').change();
-      clearLiveSummary(selectors.eventTimeSummary);
-
-      my.chronoObj$.onNext({
-        valid: false,
-        data: {chronoResult}
-      });
 
       return chronoResult;
     }
 
+    return chronoResult;
+  };
+
+  const updateFormAfterInvalidNaturalDate = (evObj) => {
+    $(selectors.eventStartISO8601).val('').change();
+    $(selectors.eventEndISO8601).val('').change();
+    clearLiveSummary(selectors.eventTimeSummary);
+
+    my.chronoObj$.onNext({
+      valid: false,
+      data: {chronoResult: chrono.parse(evObj.value)}
+    });
+  };
+
+  const updateFormAfterValidNaturalDate = (evObj) => {
+    const chronoResult = chrono.parse(evObj.value);
     $(selectors.eventStartISO8601)
       .val(chronoResult[0].start.date().toISOString());
     $(selectors.eventEndISO8601)
@@ -167,22 +179,27 @@ window.eventCreation = (($, chrono, moment, Rx) => {
       /* side effects! */
       data: showLiveSummary(selectors.eventTimeSummary, chronoResult)
     });
-
-    return chronoResult;
   };
 
-  Parsley
-    .addValidator('naturalDate', {
-      requirementType: 'string',
-      validateString:  (value, requirement) =>
-                         /* side effects! */
-                         isValidEventDate(parseNaturalDate(value)),
-      messages:        {
-        en: 'Event date not recognized.'
-      }
-    });
+
+  my.chronoChecklist.map(check => {
+    Parsley
+      .addValidator(check.id, {
+        requirementType: 'string',
+        validateString:  (value, requirement) =>
+                           // todo: fix performance
+                           check.test(chrono.parse(value)[0]),
+        messages:        {
+          en: check.msg
+        }
+      });
+  });
 
   $(document).ready(() => {
+    $(selectors.naturalDateInput).parsley()
+      .on('field:error', updateFormAfterInvalidNaturalDate)
+      .on('field:success', updateFormAfterValidNaturalDate);
+
     parseNaturalDate($(selectors.naturalDateInput));
   });
 
