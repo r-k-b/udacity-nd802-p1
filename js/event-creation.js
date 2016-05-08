@@ -5,6 +5,10 @@ window.eventCreation = (($, chrono, moment, Rx) => {
 
   my.chronoObj$ = new Rx.Subject();
 
+  const chronoObjLog$ = my.chronoObj$.subscribe(
+    x => console.debug('next chronoObj$', x)
+  );
+
   const selectors = {
     naturalDateInput:  '[data-parsley-natural-date]',
     eventStartISO8601: '#event-time-start-iso8601',
@@ -22,23 +26,23 @@ window.eventCreation = (($, chrono, moment, Rx) => {
   my.chronoChecklist = [
     {
       test: hasNumAtPath(['start', 'knownValues', 'hour']),
-      msg: 'Start time should be explicit.',
-      id: 'explicitStartTime',
+      msg:  'Start time should be explicit.',
+      id:   'explicitStartTime',
     },
     {
       test: hasNumAtPath(['end', 'knownValues', 'hour']),
-      msg: 'End time should be explicit.',
-      id: 'explicitEndTime',
+      msg:  'End time should be explicit.',
+      id:   'explicitEndTime',
     },
     {
       test: hasNumAtPath(['start', 'knownValues', 'day']),
-      msg: 'Start date should be explicit.',
-      id: 'explicitStartDate',
+      msg:  'Start date should be explicit.',
+      id:   'explicitStartDate',
     },
     {
       test: hasNumAtPath(['end', 'knownValues', 'day']),
-      msg: 'End date should be explicit.',
-      id: 'explicitEndDate',
+      msg:  'End date should be explicit.',
+      id:   'explicitEndDate',
     },
   ];
 
@@ -145,14 +149,21 @@ window.eventCreation = (($, chrono, moment, Rx) => {
    */
   const parseNaturalDate = dateInput => {
     const chronoResult = chrono.parse(
-      (typeof dateInput === 'string') ? dateInput : dateInput.value
+      (typeof dateInput === 'string') ? dateInput : dateInput[0].value
     );
 
     if (!isValidEventDate(chronoResult)) {
-
+      my.chronoObj$.onNext({
+        valid: false,
+        data:  {chronoResult: chrono.parse(dateInput[0].value)}
+      });
       return chronoResult;
     }
 
+    my.chronoObj$.onNext({
+      valid: true,
+      data:  showLiveSummary(selectors.eventTimeSummary, chronoResult)
+    });
     return chronoResult;
   };
 
@@ -163,7 +174,7 @@ window.eventCreation = (($, chrono, moment, Rx) => {
 
     my.chronoObj$.onNext({
       valid: false,
-      data: {chronoResult: chrono.parse(evObj.value)}
+      data:  {chronoResult: chrono.parse(evObj.value)}
     });
   };
 
@@ -177,7 +188,7 @@ window.eventCreation = (($, chrono, moment, Rx) => {
     my.chronoObj$.onNext({
       valid: true,
       /* side effects! */
-      data: showLiveSummary(selectors.eventTimeSummary, chronoResult)
+      data:  showLiveSummary(selectors.eventTimeSummary, chronoResult)
     });
   };
 
@@ -196,11 +207,21 @@ window.eventCreation = (($, chrono, moment, Rx) => {
   });
 
   $(document).ready(() => {
+    // intercept validation events
     $(selectors.naturalDateInput).parsley()
       .on('field:error', updateFormAfterInvalidNaturalDate)
       .on('field:success', updateFormAfterValidNaturalDate);
 
+    // ?
     parseNaturalDate($(selectors.naturalDateInput));
+
+    // pick up any autofilled data
+    $(selectors.naturalDateInput)
+    //.trigger('change')
+      .garlic({
+        onRetrieve: parseNaturalDate
+      });
+
   });
 
   Parsley.on('field:error', markInputInvalid);
@@ -304,7 +325,7 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
 
   const isStrictDateMode$ = Rx.Observable
     .merge(checkboxClick$, checkboxPoll$)
-    // .startWith(false)
+    .startWith(false)
     .distinctUntilChanged();
 
   //noinspection JSValidateJSDoc
@@ -357,7 +378,8 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
     };
 
   const setMode = isStrict => {
-    console.info('next Strict Mode:', isStrict);
+    console.info('next Strict Date Mode:', isStrict);
+
     R.map(
       R.compose(
         my.updateClass('hidden', !isStrict),
@@ -365,6 +387,7 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
       ),
       document.querySelectorAll(selectors.strictModeControls)
     );
+
     R.map(
       R.compose(
         my.updateClass('hidden', isStrict),
