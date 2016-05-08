@@ -281,6 +281,10 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
     strictModeControls:    '[data-datetime-method="strict"]',
     laxModeControls:       '[data-datetime-method="freeform"]',
     creationForm:          '#create-an-event',
+    strictDateStart:       '#event-date-start',
+    strictTimeStart:       '#event-time-start',
+    strictDateEnd:         '#event-date-end',
+    strictTimeEnd:         '#event-time-end',
   };
 
   /**
@@ -405,11 +409,39 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
     }
   );
 
+  const extractDateStrings = streamItem => {
+    if (!streamItem.valid) {
+      return {
+        dateStart: '',
+        timeStart: '',
+        dateEnd:   '',
+        timeEnd:   '',
+      }
+    }
+
+    const x = streamItem.data;
+
+    return {
+      dateStart: x.start.format('YYYY-MM-DD'),
+      timeStart: x.start.format('HH:mm'),
+      dateEnd:   x.end.format('YYYY-MM-DD'),
+      timeEnd:   x.end.format('HH:mm'),
+    }
+  };
+
 
   /* Begin side-effects */
 
   my.formGarlic = $(selectors.creationForm).garlic({
     onRetrieve: retrievedSubj$
+  });
+
+  eventCreation.chronoObj$.subscribe(function updateStrictDateModeControls(streamItem) {
+    const dateStrings = extractDateStrings(streamItem);
+    $(selectors.strictDateStart).val(dateStrings.dateStart);
+    $(selectors.strictTimeStart).val(dateStrings.timeStart);
+    $(selectors.strictDateEnd).val(dateStrings.dateEnd);
+    $(selectors.strictTimeEnd).val(dateStrings.timeEnd);
   });
 
   return my;
