@@ -206,6 +206,24 @@ window.eventCreation = (($, chrono, moment, Rx) => {
       });
   });
 
+  Parsley.addValidator('endShouldFollowStart', {
+      requirementType: 'string',
+      validateString:  (value, requirement) => {
+        const start = moment(
+          $(selectors.strictDateStart).val() + 'T' + $(selectors.strictTimeStart).val()
+        );
+        const end = moment(
+          $(selectors.strictDateEnd).val() + 'T' + $(selectors.strictTimeEnd).val()
+        );
+        return end.isAfter(start);
+      },
+      messages:        {
+        // this is awkward for the user; we should just automatically handle it...
+        en: 'The end should come after the start.'
+      }
+    }
+  );
+
   $(document).ready(() => {
     // intercept validation events
     $(selectors.naturalDateInput).parsley()
