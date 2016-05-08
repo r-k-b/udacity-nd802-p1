@@ -14,6 +14,10 @@ window.eventCreation = (($, chrono, moment, Rx) => {
     eventStartISO8601: '#event-time-start-iso8601',
     eventEndISO8601:   '#event-time-end-iso8601',
     eventTimeSummary:  '#event-times__readable-summary',
+    strictDateStart:   '#event-date-start',
+    strictTimeStart:   '#event-time-start',
+    strictDateEnd:     '#event-date-end',
+    strictTimeEnd:     '#event-time-end',
   };
 
 
@@ -210,11 +214,14 @@ window.eventCreation = (($, chrono, moment, Rx) => {
       requirementType: 'string',
       validateString:  (value, requirement) => {
         const start = moment(
-          $(selectors.strictDateStart).val() + 'T' + $(selectors.strictTimeStart).val()
+          $(selectors.strictDateStart).val() + 'T' + $(selectors.strictTimeStart).val(),
+          "YYYY-MM-DDTHH:mm"
         );
         const end = moment(
-          $(selectors.strictDateEnd).val() + 'T' + $(selectors.strictTimeEnd).val()
+          $(selectors.strictDateEnd).val() + 'T' + $(selectors.strictTimeEnd).val(),
+          "YYYY-MM-DDTHH:mm"
         );
+        debugger;
         return end.isAfter(start);
       },
       messages:        {
