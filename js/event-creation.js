@@ -15,9 +15,7 @@ window.eventCreation = (($, chrono, moment, Rx) => {
     eventEndISO8601:   '#event-time-end-iso8601',
     eventTimeSummary:  '#event-times__readable-summary',
     strictDateStart:   '#event-date-start',
-    strictTimeStart:   '#event-time-start',
     strictDateEnd:     '#event-date-end',
-    strictTimeEnd:     '#event-time-end',
   };
 
 
@@ -210,18 +208,29 @@ window.eventCreation = (($, chrono, moment, Rx) => {
       });
   });
 
-  Parsley.addValidator('endShouldFollowStart', {
+  // Parley doesn't include support for datetime or datetime-local types...
+  Parsley.addValidator('datetimeLocal', {
+      requirementType: 'string',
+      validateString:  (value, requirement) => {
+        const maybeDate = moment(value, "YYYY-MM-DDTHH:mm");
+
+        return maybeDate.isValid();
+      },
+      messages:        {
+        en: 'This should be a valid date (like `2016-01-31T13:59`).'
+      }
+    }
+  );
+
+  Parsley.addValidator('datetimeShouldFollow', {
       requirementType: 'string',
       validateString:  (value, requirement) => {
         const start = moment(
-          $(selectors.strictDateStart).val() + 'T' + $(selectors.strictTimeStart).val(),
+          $(requirement).val(),
           "YYYY-MM-DDTHH:mm"
         );
-        const end = moment(
-          $(selectors.strictDateEnd).val() + 'T' + $(selectors.strictTimeEnd).val(),
-          "YYYY-MM-DDTHH:mm"
-        );
-        debugger;
+        const end = moment(value, "YYYY-MM-DDTHH:mm");
+
         return end.isAfter(start);
       },
       messages:        {
@@ -242,7 +251,6 @@ window.eventCreation = (($, chrono, moment, Rx) => {
 
     // pick up any autofilled data
     $(selectors.naturalDateInput)
-    //.trigger('change')
       .garlic({
         onRetrieve: parseNaturalDate
       });
@@ -307,9 +315,8 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
     laxModeControls:       '[data-datetime-method="freeform"]',
     creationForm:          '#create-an-event',
     strictDateStart:       '#event-date-start',
-    strictTimeStart:       '#event-time-start',
     strictDateEnd:         '#event-date-end',
-    strictTimeEnd:         '#event-time-end',
+    forceInitOnVisible:    '[data-force-parsley-init-on-visible]',
   };
 
   /**
@@ -424,6 +431,10 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
       ),
       document.querySelectorAll(selectors.laxModeControls)
     );
+
+    if (isStrict) {
+      $(selectors.forceInitOnVisible).parsley()
+    }
   };
 
 
@@ -464,9 +475,7 @@ window.eventCreationDateMethod = (Rx, R, $, eventCreation) => {
   eventCreation.chronoObj$.subscribe(function updateStrictDateModeControls(streamItem) {
     const dateStrings = extractDateStrings(streamItem);
     $(selectors.strictDateStart).val(dateStrings.dateStart);
-    $(selectors.strictTimeStart).val(dateStrings.timeStart);
     $(selectors.strictDateEnd).val(dateStrings.dateEnd);
-    $(selectors.strictTimeEnd).val(dateStrings.timeEnd);
   });
 
   return my;

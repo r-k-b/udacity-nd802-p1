@@ -155,12 +155,15 @@
 
         <fieldset data-datetime-method="strict" class="form-α__fieldset-reset hidden" disabled>
           <div class="form-α__field-group">
-            <label for="event-date-start" class="form-α__field-label">What date does the event begin?</label>
+            <label for="event-date-start" class="form-α__field-label">When does the event begin?</label>
 
-            <input type="date"
+            <input type="datetime-local"
                    required
                    aria-required="true"
                    data-datetime-method="strict"
+                   data-parsley-trigger="input focusout keyup"
+                   data-parsley-datetime-local
+                   data-force-parsley-init-on-visible
                    disabled
                    id="event-date-start"
                    name="event-date-start"
@@ -175,31 +178,16 @@
           </div>
 
           <div class="form-α__field-group">
-            <label for="event-time-start" class="form-α__field-label">What time does the event begin?</label>
+            <label for="event-date-end" class="form-α__field-label">When does the event end?</label>
 
-            <input type="time"
+            <input type="datetime-local"
                    required
                    aria-required="true"
                    data-datetime-method="strict"
-                   disabled
-                   id="event-time-start"
-                   name="event-time-start"
-                   class="form-α__field-input__container"
-                   data-parsley-errors-container="#event-time-start__validation"
-                   aria-describedby="event-time-start__validation">
-
-            <div class="form-α__field-validation-message"
-                 id="event-time-start__validation"
-                 aria-live="polite"></div>
-          </div>
-
-          <div class="form-α__field-group">
-            <label for="event-date-end" class="form-α__field-label">What date does the event end?</label>
-
-            <input type="date"
-                   required
-                   aria-required="true"
-                   data-datetime-method="strict"
+                   data-parsley-datetime-should-follow="#event-date-start"
+                   data-parsley-trigger="input focusout keyup"
+                   data-parsley-datetime-local
+                   data-force-parsley-init-on-visible
                    disabled
                    id="event-date-end"
                    name="event-date-end"
@@ -211,28 +199,6 @@
                  id="event-date-end__validation"
                  aria-live="polite"></div>
           </div>
-
-          <div class="form-α__field-group">
-            <label for="event-time-end" class="form-α__field-label">What time does the event end?</label>
-
-            <input type="time"
-                   required
-                   aria-required="true"
-                   data-datetime-method="strict"
-                   disabled
-                   data-parsley-end-should-follow-start
-                   id="event-time-end"
-                   name="event-time-end"
-                   class="form-α__field-input__container"
-                   data-parsley-errors-container="#event-time-end__validation"
-                   aria-describedby="event-time-end__validation"
-                   placeholder="Jo Smith">
-
-            <div class="form-α__field-validation-message"
-                 id="event-time-end__validation"
-                 aria-live="polite"></div>
-          </div>
-
 
         </fieldset>
 
